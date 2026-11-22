@@ -1,0 +1,1089 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dozo · The business: go-to-market, model and the deal</title>
+<meta name="description" content="Dozo investor view: go-to-market rollout, unit economics, growth simulator, shark deal room and company dashboard.">
+<meta name="theme-color" content="#0E1A2B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%233DDC97'/%3E%3Crect x='14' y='24' width='36' height='16' rx='8' fill='none' stroke='%230E1A2B' stroke-width='4'/%3E%3Crect x='14' y='24' width='18' height='16' rx='8' fill='%230E1A2B'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>:root{
+  --navy:#0E1A2B;--navy2:#16263B;--navy3:#1F3349;--line:#24384F;--mint:#3DDC97;--mint-d:#137A4F;--mint-l:#CDEFDD;
+  --amber:#FFB86B;--coral:#FF8A5B;--coral-d:#B4442A;--blue:#5BC0FF;--lilac:#C9A7FF;
+  --light:#F5F7F2;--card:#FBFCF8;--rule:#DCE3DA;--ink:#0E1A2B;--muted:#4A5868;--soft:#C9D6E3;--white:#FBFBF8;
+  --r:24px;--shadow:0 30px 80px rgba(8,14,24,.18);
+  --fh:'Space Grotesk',ui-sans-serif,system-ui,sans-serif;--fb:'Inter',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{overflow-x:hidden;margin:0;font-family:var(--fb);color:var(--ink);background:var(--light);-webkit-font-smoothing:antialiased;line-height:1.5}
+h1,h2,h3,h4{font-family:var(--fh);margin:0;letter-spacing:-.02em;line-height:1.08}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:10px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:50;background:rgba(14,26,43,.86);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:72px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);font-family:var(--fh);font-weight:700;font-size:26px;letter-spacing:-.03em}
+.logo-mark{width:34px;height:34px;border-radius:11px;background:var(--mint);display:grid;place-items:center}
+.links{display:flex;gap:4px;margin-left:18px}
+.links a{color:var(--soft);text-decoration:none;font-weight:600;font-size:15px;padding:9px 14px;border-radius:999px;transition:.2s}
+.links a:hover{color:var(--white);background:rgba(255,255,255,.06)}
+.links a.on{color:var(--navy);background:var(--mint)}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:12px}
+.lang{display:flex;background:var(--navy2);border:1px solid var(--line);border-radius:999px;padding:4px}
+.lang button{border:0;background:transparent;color:var(--soft);font-weight:600;font-size:13px;padding:6px 11px;border-radius:999px}
+.lang button.on{background:var(--white);color:var(--navy)}
+.menu-btn{display:none;border:0;background:var(--navy2);color:var(--white);width:44px;height:44px;border-radius:12px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:999px;padding:14px 24px;font-weight:700;font-size:16px;text-decoration:none;transition:transform .15s,box-shadow .2s,background .2s;white-space:nowrap}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn-mint{background:var(--mint);color:var(--navy);box-shadow:0 12px 30px rgba(61,220,151,.35)}
+.btn-dark{background:var(--navy);color:var(--white)}
+.btn-ghost{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.25)}
+.btn-ghost.dk{color:var(--navy);border-color:var(--rule)}
+.btn-sm{padding:10px 16px;font-size:14px}
+.btn-coral{background:var(--coral);color:var(--navy)}
+
+/* ---------- pages ---------- */
+.page{display:none;animation:pagein .5s ease both}
+.page.on{display:block}
+@keyframes pagein{from{opacity:0;transform:translateY(12px)}}
+
+.dark{background:var(--navy);color:var(--white)}
+.eyebrow{font-weight:700;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--mint-d)}
+.dark .eyebrow{color:var(--mint)}
+.lead{font-size:20px;color:var(--muted);max-width:640px}
+.dark .lead{color:var(--soft)}
+.sec{padding:110px 0}
+.sec-h{display:flex;flex-direction:column;gap:16px;margin-bottom:56px}
+.sec-h h2{font-size:clamp(36px,4.4vw,56px)}
+.center{text-align:center;align-items:center}
+.center .lead{margin:0 auto}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;background:radial-gradient(1200px 600px at 85% 20%,rgba(61,220,151,.14),transparent 60%),var(--navy);color:var(--white)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;min-height:calc(100vh - 72px);padding-top:40px;padding-bottom:60px}
+.pill-tag{display:inline-flex;align-items:center;gap:10px;background:var(--navy2);border:1px solid var(--line);padding:8px 16px 8px 8px;border-radius:999px;font-size:14px;font-weight:600;color:var(--soft)}
+.pill-tag b{background:var(--mint);color:var(--navy);padding:4px 10px;border-radius:999px;font-size:12px;letter-spacing:.06em}
+.hero h1{font-size:clamp(64px,9vw,128px);letter-spacing:-.05em;margin:26px 0 22px}
+.hero h1 span{color:var(--mint)}
+.hero .lead{font-size:22px}
+.hero-ctas{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+.hero-art{position:relative}
+.hero-art svg{width:100%;height:auto;display:block}
+.float-note{position:absolute;display:flex;gap:14px;align-items:center;background:var(--card);color:var(--navy);padding:14px 18px;border-radius:20px;box-shadow:0 24px 60px rgba(0,0,0,.35);animation:bob 5s ease-in-out infinite}
+.float-note .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;flex-shrink:0}
+.float-note small{display:block;color:var(--muted);font-size:13px}
+.float-note strong{font-size:15px}
+@keyframes bob{50%{transform:translateY(-10px)}}
+.trust{display:flex;gap:34px;margin-top:48px;flex-wrap:wrap}
+.trust div{display:flex;flex-direction:column}
+.trust b{font-family:var(--fh);font-size:30px;color:var(--white)}
+.trust span{font-size:14px;color:var(--soft)}
+
+/* ---------- stats band ---------- */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.stat{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:36px}
+.stat b{display:block;font-family:var(--fh);font-size:clamp(44px,5vw,64px);color:var(--mint-d);letter-spacing:-.03em;line-height:1}
+.stat p{margin-top:14px;font-size:17px;color:var(--muted)}
+.src{font-size:13px;color:var(--muted);margin-top:22px}
+.src a{color:var(--mint-d)}
+
+/* ---------- steps ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;counter-reset:s}
+.step{background:var(--navy2);border:1px solid var(--line);border-radius:var(--r);padding:30px;position:relative;transition:.25s}
+.step:hover{transform:translateY(-6px);border-color:var(--mint)}
+.step .n{font-family:var(--fh);font-weight:700;color:var(--mint);font-size:15px;letter-spacing:.1em}
+.step .ico{width:64px;height:64px;border-radius:18px;background:rgba(61,220,151,.12);display:grid;place-items:center;margin:18px 0}
+.step h3{font-size:24px;margin-bottom:8px}
+.step p{color:var(--soft);font-size:16px}
+
+/* ---------- features ---------- */
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.feat{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:32px;transition:.25s}
+.feat:hover{box-shadow:var(--shadow);transform:translateY(-4px)}
+.feat .ico{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;margin-bottom:20px}
+.feat h3{font-size:22px;margin-bottom:8px}
+.feat p{color:var(--muted)}
+
+.cta-band{background:var(--mint);border-radius:36px;padding:64px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center}
+.cta-band h2{font-size:clamp(34px,4vw,52px)}
+.cta-band p{font-size:19px;margin-top:12px;color:#1C3A2E}
+
+/* ---------- demo ---------- */
+.demo-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:34px}
+.demo-top h2{font-size:clamp(34px,4vw,52px)}
+.demo-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:28px;align-items:start}
+.demo-grid>*,.dgrid>*{min-width:0}
+.panel{background:var(--navy2);border:1px solid var(--line);border-radius:32px;padding:30px}
+.clock-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;gap:16px;flex-wrap:wrap}
+.clock{font-family:var(--fh);font-size:46px;font-weight:700;letter-spacing:-.02em}
+.clock small{font-size:16px;color:var(--soft);font-family:var(--fb);font-weight:500;display:block;letter-spacing:0}
+.status-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;font-weight:700;font-size:14px;background:var(--navy3);color:var(--soft)}
+.status-chip i{width:10px;height:10px;border-radius:50%;background:var(--soft)}
+.status-chip.ring{background:rgba(61,220,151,.15);color:var(--mint)}.status-chip.ring i{background:var(--mint);animation:blink 1s infinite}
+.status-chip.miss{background:rgba(255,138,91,.15);color:var(--coral)}.status-chip.miss i{background:var(--coral);animation:blink .7s infinite}
+.status-chip.ok{background:rgba(61,220,151,.15);color:var(--mint)}.status-chip.ok i{background:var(--mint)}
+@keyframes blink{50%{opacity:.25}}
+
+.box{background:linear-gradient(160deg,#1B2E46,#132236);border:1px solid #2A4058;border-radius:30px;padding:26px 26px 30px;position:relative;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 30px 60px rgba(0,0,0,.35)}
+.box-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.box-brand{display:flex;align-items:center;gap:10px;font-family:var(--fh);font-weight:700;font-size:20px}
+.led{width:14px;height:14px;border-radius:50%;background:#2E4A66;transition:.3s}
+.led.on{background:var(--mint);box-shadow:0 0 0 6px rgba(61,220,151,.18),0 0 24px var(--mint)}
+.led.warn{background:var(--coral);box-shadow:0 0 0 6px rgba(255,138,91,.18),0 0 24px var(--coral)}
+.grille{display:grid;grid-template-columns:repeat(8,6px);gap:5px}
+.grille span{width:6px;height:6px;border-radius:50%;background:#3A506A;transition:.2s}
+.grille.talk span{animation:grille .5s infinite alternate}
+.grille.talk span:nth-child(odd){animation-delay:.25s}
+@keyframes grille{to{background:var(--mint)}}
+.slots{display:grid;grid-template-columns:76px repeat(7,1fr);gap:9px;align-items:center}
+.slots .dh{text-align:center;font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--soft)}
+.slots .dh.today{color:var(--mint)}
+.slots .rh{font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--soft)}
+.slot{aspect-ratio:1.1;border-radius:14px;background:var(--navy3);border:0;display:grid;place-items:center;position:relative;transition:.25s;padding:0}
+.slot .cap{width:52%;height:24%;border-radius:999px;background:linear-gradient(90deg,var(--amber) 50%,#F4F1EA 50%);box-shadow:0 2px 0 rgba(0,0,0,.2)}
+.slot.taken{background:#112033;border:2px dashed #2A3F57}
+.slot.taken .cap{display:none}
+.slot.taken::after{content:'';width:14px;height:8px;border-left:3px solid #4B6480;border-bottom:3px solid #4B6480;transform:rotate(-45deg) translate(1px,-2px)}
+.slot.missed{background:#2A1E22;border:2px solid var(--coral)}
+.slot.now{background:var(--mint);animation:glow 1.1s ease-in-out infinite}
+.slot.now .cap{background:linear-gradient(90deg,var(--navy) 50%,#fff 50%)}
+.slot.alarm{background:var(--coral);animation:glowc .8s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 0 4px rgba(61,220,151,.25),0 0 22px rgba(61,220,151,.6)}50%{box-shadow:0 0 0 10px rgba(61,220,151,.12),0 0 46px rgba(61,220,151,.9)}}
+@keyframes glowc{0%,100%{box-shadow:0 0 0 4px rgba(255,138,91,.25),0 0 22px rgba(255,138,91,.6)}50%{box-shadow:0 0 0 10px rgba(255,138,91,.12),0 0 46px rgba(255,138,91,.9)}}
+.slot.now::before,.slot.alarm::before{content:'Tap to open';position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--white);color:var(--navy);font-size:11px;font-weight:700;padding:4px 8px;border-radius:8px;white-space:nowrap}
+.speech{margin-top:22px;min-height:66px;display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.04);border:1px dashed var(--line);border-radius:18px;padding:14px 18px;color:var(--soft);font-size:16px;transition:.3s}
+.speech.live{background:var(--mint);color:var(--navy);border-color:transparent;font-weight:700;font-size:18px}
+.speech svg{flex-shrink:0}
+.controls{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:22px}
+.ctl{display:flex;align-items:center;gap:12px;border:1px solid var(--line);background:var(--navy3);color:var(--white);border-radius:16px;padding:14px 16px;font-weight:600;font-size:15px;text-align:left;transition:.2s}
+.ctl:hover{border-color:var(--mint);background:#23395A}
+.ctl:disabled{opacity:.4;cursor:not-allowed}
+.ctl .k{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex-shrink:0}
+.ctl.primary{grid-column:1/-1;background:var(--mint);color:var(--navy);border-color:var(--mint);justify-content:center;font-size:16px;font-weight:700}
+.ctl.primary:hover{background:#5BE5A9}
+.log{margin-top:22px;border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:10px;max-height:190px;overflow:auto}
+.log div{display:flex;gap:12px;font-size:14px;color:var(--soft)}
+.log time{font-family:var(--fh);color:var(--mint);font-weight:700;min-width:68px}
+
+/* phone */
+.phone{width:100%;max-width:370px;margin:0 auto;background:#0A1320;border-radius:54px;padding:12px;box-shadow:0 40px 90px rgba(0,0,0,.45),inset 0 0 0 2px #24384F;position:relative}
+.screen{color:var(--ink);background:var(--light);border-radius:44px;overflow:hidden;height:720px;display:flex;flex-direction:column;position:relative}
+.notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:110px;height:30px;background:#0A1320;border-radius:20px;z-index:3}
+.sbar{display:flex;justify-content:space-between;padding:16px 28px 0;font-size:13px;font-weight:700;color:var(--navy)}
+.app-h{padding:26px 22px 14px;display:flex;justify-content:space-between;align-items:center}
+.app-h h4{font-size:22px}
+.app-h small{color:var(--muted);font-size:13px;display:block;font-family:var(--fb);letter-spacing:0;font-weight:500}
+.avatar{width:44px;height:44px;border-radius:50%;overflow:hidden;flex-shrink:0;display:block}
+.avatar svg{width:100%;height:100%;display:block}
+.pt-card{margin:0 16px;background:var(--navy);color:var(--white);border-radius:24px;padding:18px;display:flex;gap:14px;align-items:center}
+.pt-card .meta{flex:1}
+.pt-card b{font-family:var(--fh);font-size:18px}
+.pt-card small{display:block;color:var(--soft);font-size:13px}
+.ring-mini{width:56px;height:56px}
+.feed{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.feed-empty{color:var(--muted);text-align:center;font-size:14px;margin-top:30px}
+.note{background:var(--card);border:1px solid var(--rule);border-radius:20px;padding:14px;display:flex;gap:12px;animation:slidein .45s cubic-bezier(.2,.8,.2,1) both}
+.note .ic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex-shrink:0}
+.note b{font-size:14.5px;display:block;line-height:1.3}
+.note small{color:var(--muted);font-size:12.5px}
+.note .acts{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.note.warn{border-color:var(--coral);box-shadow:0 10px 30px rgba(255,138,91,.25)}
+@keyframes slidein{from{opacity:0;transform:translateY(-16px) scale(.97)}}
+.push{position:absolute;top:50px;left:12px;right:12px;z-index:4;background:rgba(251,252,248,.97);backdrop-filter:blur(10px);border-radius:22px;padding:14px;box-shadow:0 20px 50px rgba(0,0,0,.3);display:flex;gap:12px;transform:translateY(-140%);transition:transform .5s cubic-bezier(.2,.9,.2,1)}
+.push.show{transform:none}
+.push .ic{width:38px;height:38px;border-radius:10px;background:var(--mint);display:grid;place-items:center;flex-shrink:0}
+.push b{font-size:14px;display:block}
+.push small{font-size:12.5px;color:var(--muted)}
+.call{position:absolute;inset:0;z-index:5;background:linear-gradient(180deg,#14324A,#0E1A2B);color:var(--white);display:none;flex-direction:column;align-items:center;justify-content:space-between;padding:90px 30px 60px;text-align:center}
+.call.show{display:flex;animation:pagein .3s both}
+.call .who{display:flex;flex-direction:column;align-items:center;gap:14px}
+.call .big-av{width:130px;height:130px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 10px rgba(61,220,151,.15),0 0 0 22px rgba(61,220,151,.07);animation:pulse 1.6s infinite}
+.call .big-av svg{width:100%;height:100%}
+@keyframes pulse{50%{box-shadow:0 0 0 16px rgba(61,220,151,.12),0 0 0 32px rgba(61,220,151,.04)}}
+.call h4{font-size:28px}
+.call p{color:var(--soft)}
+.hang{width:72px;height:72px;border-radius:50%;border:0;background:var(--coral);display:grid;place-items:center}
+.tabbar{display:flex;justify-content:space-around;padding:12px 10px 22px;border-top:1px solid var(--rule);background:var(--card)}
+.tabbar span{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--muted)}
+.tabbar span.on{color:var(--mint-d)}
+
+/* ---------- family dashboard ---------- */
+.dash-h{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.dash-h h2{font-size:clamp(32px,3.6vw,46px)}
+.who-sel{display:flex;gap:10px;flex-wrap:wrap}
+.who-sel button{display:flex;align-items:center;gap:10px;border:1.5px solid var(--rule);background:var(--card);border-radius:999px;padding:6px 16px 6px 6px;font-weight:600}
+.who-sel button.on{border-color:var(--navy);background:var(--navy);color:var(--white)}
+.who-sel .avatar{width:34px;height:34px}
+.dgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:22px}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:26px}
+.card h3{font-size:20px}
+.card-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;gap:10px}
+.card-h small{color:var(--muted);font-size:14px}
+.c4{grid-column:span 4}.c5{grid-column:span 5}.c6{grid-column:span 6}.c7{grid-column:span 7}.c8{grid-column:span 8}.c12{grid-column:span 12}
+.card.navy{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.card.navy small{color:var(--soft)}
+.profile{display:flex;gap:18px;align-items:center}
+.profile .avatar{width:84px;height:84px}
+.profile h3{font-size:26px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:5px 12px;border-radius:999px;background:var(--light);color:var(--ink);border:1px solid var(--rule)}
+.navy .chip{background:var(--navy2);border-color:var(--line);color:var(--white)}
+.chip.g{background:#E3F6EC;border-color:#BFE8D2;color:var(--mint-d)}
+.chip.r{background:#FCEAE3;border-color:#F4C6B3;color:var(--coral-d)}
+.chip.a{background:#FFF1DF;border-color:#FAD9AF;color:#8A5310}
+.chip.b{background:#E4F3FD;border-color:#BCE2F8;color:#1C5F8A}
+.big-ring{display:flex;align-items:center;gap:24px}
+.big-ring b{font-family:var(--fh);font-size:46px;display:block;line-height:1}
+.sched{display:flex;flex-direction:column;gap:12px}
+.srow{display:flex;align-items:center;gap:14px;padding:14px;border-radius:18px;background:var(--light);border:1px solid var(--rule)}
+.srow .t{font-family:var(--fh);font-weight:700;min-width:78px}
+.srow .m{flex:1}
+.srow .m b{display:block;font-size:15px}
+.srow .m small{color:var(--muted);font-size:13px}
+.bars{display:flex;align-items:flex-end;gap:10px;height:260px;padding-top:24px}
+.bars .bc{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end}
+.bars .bar{width:100%;max-width:42px;border-radius:10px 10px 4px 4px;background:var(--mint);position:relative;transition:height .8s cubic-bezier(.2,.8,.2,1)}
+.bars .bar.low{background:var(--amber)}
+.bars .bar span{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:700;color:var(--ink)}
+.bars label{font-size:12px;color:var(--muted);font-weight:600}
+.seg-tabs{display:flex;background:var(--light);border:1px solid var(--rule);border-radius:999px;padding:3px}
+.seg-tabs button{border:0;background:transparent;padding:6px 12px;border-radius:999px;font-weight:600;font-size:13px;color:var(--muted)}
+.seg-tabs button.on{background:var(--navy);color:var(--white)}
+.meds{display:flex;flex-direction:column;gap:12px}
+.med{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:14px;border-radius:18px;border:1px solid var(--rule)}
+.med .pill-ic{width:44px;height:44px;border-radius:14px;display:grid;place-items:center}
+.med b{display:block}
+.med small{color:var(--muted);font-size:13px}
+.meter{height:7px;border-radius:7px;background:#E6EBE4;margin-top:8px;overflow:hidden}
+.meter i{display:block;height:100%;border-radius:7px}
+.people{display:flex;flex-direction:column;gap:12px}
+.person{display:flex;align-items:center;gap:12px}
+.person .avatar{width:42px;height:42px}
+.person .m{flex:1}
+.person .m b{display:block;font-size:15px}
+.person small{color:var(--muted);font-size:13px}
+.navy .person small{color:var(--soft)}
+.dev{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.dev div{background:var(--navy2);border:1px solid var(--line);border-radius:16px;padding:14px}
+.dev small{display:block;color:var(--soft);font-size:13px}
+.dev b{font-family:var(--fh);font-size:22px}
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-i{display:grid;grid-template-columns:70px 18px 1fr;gap:12px;padding-bottom:16px;position:relative}
+.tl-i time{font-family:var(--fh);font-weight:700;font-size:14px;color:var(--muted)}
+.tl-i .dot{width:14px;height:14px;border-radius:50%;margin-top:3px;position:relative;z-index:1}
+.tl-i::before{content:'';position:absolute;left:88px;top:18px;bottom:0;width:2px;background:var(--rule)}
+.tl-i:last-child::before{display:none}
+.tl-i b{font-size:15px;display:block}
+.tl-i small{color:var(--muted);font-size:13px}
+.premium{background:linear-gradient(135deg,var(--navy),#1C3654);color:var(--white);border-radius:var(--r);padding:26px;position:relative;overflow:hidden}
+.premium::after{content:'';position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:rgba(61,220,151,.15)}
+
+/* ---------- care home ---------- */
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-bottom:22px}
+.kpi{background:var(--card);border:1px solid var(--rule);border-radius:22px;padding:22px}
+.kpi small{color:var(--muted);font-size:14px;font-weight:600}
+.kpi b{display:block;font-family:var(--fh);font-size:38px;margin-top:6px;letter-spacing:-.02em}
+.kpi.alert{background:#FFF4EF;border-color:#F4C6B3}
+.kpi.alert b{color:var(--coral-d)}
+.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+.search{flex:1;min-width:220px;display:flex;align-items:center;gap:10px;border:1px solid var(--rule);background:var(--light);border-radius:14px;padding:0 14px}
+.search input{border:0;background:transparent;font:inherit;padding:12px 0;flex:1;outline:0}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters button{border:1px solid var(--rule);background:var(--card);border-radius:999px;padding:8px 14px;font-weight:600;font-size:14px;color:var(--muted)}
+.filters button.on{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.tbl{width:100%;border-collapse:separate;border-spacing:0}
+.tbl th{text-align:left;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:12px 14px;border-bottom:1px solid var(--rule)}
+.tbl td{padding:14px;border-bottom:1px solid var(--rule);font-size:15px;vertical-align:middle}
+.tbl tr{transition:background .2s}
+.tbl tbody tr:hover{background:var(--light)}
+.tbl tr.flash{animation:flashrow 1.2s 3}
+@keyframes flashrow{50%{background:#FFE7DC}}
+.res{display:flex;align-items:center;gap:12px}
+.res .avatar{width:38px;height:38px}
+.res b{display:block}
+.res small{color:var(--muted);font-size:13px}
+.adh{display:flex;align-items:center;gap:10px;min-width:120px}
+.adh .meter{flex:1;margin:0}
+.tbl-wrap{overflow-x:auto}
+
+/* ---------- pricing ---------- */
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+.price{background:var(--card);border:1px solid var(--rule);border-radius:30px;padding:36px;display:flex;flex-direction:column;gap:18px;position:relative}
+.price.pop{background:var(--navy);color:var(--white);border-color:var(--navy);transform:translateY(-12px);box-shadow:var(--shadow)}
+.price .tag{position:absolute;top:-14px;left:36px;background:var(--mint);color:var(--navy);font-weight:700;font-size:13px;padding:6px 14px;border-radius:999px}
+.price h3{font-size:22px}
+.price .amt{font-family:var(--fh);font-size:56px;font-weight:700;letter-spacing:-.03em;line-height:1}
+.price .amt small{font-size:17px;font-family:var(--fb);font-weight:500;color:var(--muted);letter-spacing:0}
+.price.pop .amt small,.price.pop .desc{color:var(--soft)}
+.price .desc{color:var(--muted)}
+.price ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;flex:1}
+.price li{display:flex;gap:10px;align-items:flex-start}
+.price li svg{flex-shrink:0;margin-top:3px}
+.faq{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq details{background:var(--card);border:1px solid var(--rule);border-radius:20px;padding:20px 24px}
+.faq summary{font-weight:700;font-size:18px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:14px}
+.faq summary::after{content:'+';font-size:24px;color:var(--mint-d);line-height:1}
+.faq details[open] summary::after{content:'−'}
+.faq p{margin-top:12px;color:var(--muted)}
+.order{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.form{background:var(--card);border-radius:30px;padding:34px;display:flex;flex-direction:column;gap:16px;color:var(--ink)}
+.form label{font-weight:600;font-size:14px;display:flex;flex-direction:column;gap:8px}
+.form input,.form select{font:inherit;padding:13px 16px;border:1px solid var(--rule);border-radius:14px;background:var(--light)}
+.form .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* ---------- footer, toast ---------- */
+footer{background:var(--navy);color:var(--soft);padding:60px 0 40px}
+footer .wrap{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-end}
+footer .team{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+footer .team span{background:var(--navy2);border:1px solid var(--line);padding:6px 14px;border-radius:999px;font-size:14px;color:var(--white)}
+.toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,140%);background:var(--navy);color:var(--white);padding:14px 22px;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.3);z-index:100;font-weight:600;display:flex;gap:10px;align-items:center;transition:transform .4s cubic-bezier(.2,.9,.2,1)}
+.toast.show{transform:translate(-50%,0)}
+.demo-ribbon{background:var(--amber);color:var(--navy);text-align:center;font-size:13px;font-weight:700;padding:7px 12px}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:1080px){
+  .hero .wrap,.demo-grid,.order,.cta-band{grid-template-columns:1fr}
+  .steps,.kpis{grid-template-columns:repeat(2,1fr)}
+  .feats,.prices,.stats{grid-template-columns:1fr 1fr}
+  .c4,.c5,.c6,.c7,.c8{grid-column:span 12}
+  .price.pop{transform:none}
+}
+@media (max-width:760px){
+  .links{display:none;position:absolute;top:72px;left:0;right:0;background:var(--navy);flex-direction:column;padding:14px;margin:0;border-bottom:1px solid var(--line)}
+  .links.open{display:flex}
+  .menu-btn{display:grid;place-items:center}
+  .nav-r .btn{display:none}
+  .steps,.feats,.prices,.stats,.kpis,.controls{grid-template-columns:1fr}
+  .sec{padding:72px 0}
+  .cta-band{padding:36px}
+  .slots{grid-template-columns:44px repeat(7,1fr);gap:5px}
+  .slots .rh{font-size:9px}
+  .form .row2{grid-template-columns:1fr}
+  .panel{padding:18px}.box{padding:16px}.wrap{padding:0 18px}.lang button{padding:6px 8px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- business site additions ---------- */
+.subhero{background:radial-gradient(900px 500px at 90% 0%,rgba(61,220,151,.16),transparent 60%),var(--navy);color:var(--white);padding:70px 0 40px}
+.subhero h1{font-size:clamp(44px,6vw,84px);letter-spacing:-.04em;margin:16px 0 18px}
+.subhero h1 span{color:var(--mint)}
+.subhero .lead{color:var(--soft)}
+.card{color:var(--ink)}
+.card.navy{color:var(--white)}
+.presenter{display:inline-flex;align-items:center;gap:12px;background:var(--navy2);border:1px solid var(--line);border-radius:999px;padding:6px 18px 6px 6px;font-weight:600;color:var(--soft)}
+.presenter .avatar{width:38px;height:38px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:34px}
+.tabs a{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--soft);font-weight:700;padding:12px 18px;border-radius:16px;border:1px solid var(--line);background:var(--navy2);transition:.2s}
+.tabs a b{font-family:var(--fh);color:var(--mint);font-size:14px}
+.tabs a:hover{color:var(--white);border-color:var(--mint)}
+.tabs a.on{background:var(--mint);color:var(--navy);border-color:var(--mint)}
+.tabs a.on b{color:var(--navy)}
+.view{display:none;animation:pagein .5s ease both}
+.view.on{display:block}
+.vsec{padding:60px 0 90px}
+.vh{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:30px}
+.vh h2{font-size:clamp(32px,3.8vw,48px)}
+.vh .lead{margin-top:10px;font-size:18px}
+.est{font-size:13px;color:var(--muted);margin-top:16px}
+.dark .est{color:var(--soft)}
+
+/* sliders */
+.ctrl{display:flex;flex-direction:column;gap:10px}
+.ctrl .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.ctrl label{font-weight:600;font-size:15px}
+.ctrl output{font-family:var(--fh);font-weight:700;font-size:22px;color:var(--mint-d)}
+.navy .ctrl output,.dark .ctrl output{color:var(--mint)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:8px;background:linear-gradient(90deg,var(--mint) var(--p,50%),#DCE3DA var(--p,50%));outline:0;cursor:pointer}
+.navy input[type=range],.dark input[type=range]{background:linear-gradient(90deg,var(--mint) var(--p,50%),#2A3F57 var(--p,50%))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--white);border:4px solid var(--mint);box-shadow:0 4px 14px rgba(0,0,0,.25);transition:transform .15s}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--white);border:4px solid var(--mint)}
+input[type=range]:focus-visible{outline:3px solid var(--blue);outline-offset:6px}
+.ctrl small{color:var(--muted);font-size:13px}
+.navy .ctrl small{color:var(--soft)}
+.ctrls{display:flex;flex-direction:column;gap:26px}
+
+/* big numbers */
+.bign{font-family:var(--fh);font-weight:700;letter-spacing:-.03em;line-height:1}
+.mbox{background:var(--light);border:1px solid var(--rule);border-radius:20px;padding:20px}
+.navy .mbox{background:var(--navy2);border-color:var(--line)}
+.mbox small{display:block;color:var(--muted);font-size:14px;font-weight:600}
+.navy .mbox small{color:var(--soft)}
+.mbox .bign{font-size:38px;margin-top:8px}
+.mgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.good{color:var(--mint-d)}.navy .good{color:var(--mint)}
+.bad{color:var(--coral-d)}.navy .bad{color:var(--coral)}
+
+/* map */
+.mapwrap{position:relative;background:radial-gradient(600px 500px at 45% 65%,rgba(61,220,151,.10),transparent 70%),var(--navy2);border:1px solid var(--line);border-radius:32px;overflow:hidden;aspect-ratio:1/1.05}
+.mapwrap svg.grid{position:absolute;inset:0;width:100%;height:100%}
+.city{position:absolute;width:0;height:0}
+.city i{position:absolute;left:0;top:0;transform:translate(-50%,-50%);display:block;width:14px;height:14px;border-radius:50%;background:#3A506A;border:3px solid #24384F;transition:.5s}
+.city span{position:absolute;top:0;transform:translateY(-50%);left:14px;font-size:12px;font-weight:700;color:var(--soft);white-space:nowrap;background:rgba(14,26,43,.7);padding:2px 8px;border-radius:999px;transition:.5s}
+.city.lit i{background:var(--mint);border-color:rgba(61,220,151,.35);box-shadow:0 0 0 8px rgba(61,220,151,.12),0 0 24px var(--mint)}
+.city.lit span{color:var(--white)}
+.city.hq i{width:22px;height:22px}
+.city.l span{left:auto;right:14px}
+.city.hq span{left:18px}
+.city.lit.hq i{animation:hq 1.8s infinite}
+@keyframes hq{50%{box-shadow:0 0 0 16px rgba(61,220,151,.08),0 0 36px var(--mint)}}
+.phase-btns{display:flex;gap:10px;flex-wrap:wrap}
+.phase-btns button{border:1.5px solid var(--line);background:var(--navy2);color:var(--soft);border-radius:16px;padding:12px 16px;text-align:left;min-width:150px;transition:.2s}
+.phase-btns button b{display:block;font-family:var(--fh);color:var(--white);font-size:18px}
+.phase-btns button.on{border-color:var(--mint);background:rgba(61,220,151,.12)}
+.phase-btns button.on b{color:var(--mint)}
+.rollstats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.rollstats div{background:var(--navy2);border:1px solid var(--line);border-radius:20px;padding:18px}
+.rollstats small{color:var(--soft);font-size:14px;font-weight:600}
+.rollstats b{display:block;font-family:var(--fh);font-size:34px;margin-top:4px}
+.gtm-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+
+/* channels */
+.chan-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.chan-tabs button{display:flex;align-items:center;gap:12px;border:1.5px solid var(--rule);background:var(--card);border-radius:18px;padding:14px;font-weight:700;text-align:left;transition:.2s}
+.chan-tabs button .k{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex-shrink:0}
+.chan-tabs button.on{border-color:var(--navy);box-shadow:0 14px 30px rgba(14,26,43,.12)}
+.chan-stage{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;margin-top:24px;align-items:center}
+.creative{background:var(--navy);border-radius:32px;min-height:460px;display:grid;place-items:center;padding:30px;position:relative;overflow:hidden}
+.creative::before{content:'';position:absolute;width:420px;height:420px;border-radius:50%;background:rgba(61,220,151,.10);top:-120px;right:-120px}
+.chan-info h3{font-size:30px;margin-bottom:12px}
+.chan-info .lead{font-size:17px}
+.chan-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}
+.chan-kpis div{background:var(--card);border:1px solid var(--rule);border-radius:18px;padding:16px}
+.chan-kpis small{color:var(--muted);font-size:13px;font-weight:600}
+.chan-kpis b{display:block;font-family:var(--fh);font-size:26px;margin-top:4px}
+.example{background:#E3F6EC;border:1px solid #BFE8D2;border-radius:18px;padding:16px 18px;color:#164A33}
+.example b{display:block;margin-bottom:4px}
+/* mock creatives */
+.mini-phone{width:250px;background:#0A1320;border-radius:38px;padding:9px;box-shadow:0 30px 60px rgba(0,0,0,.45);position:relative;z-index:1}
+.mini-phone .scr{border-radius:30px;overflow:hidden;background:#111;height:470px;position:relative;display:flex;flex-direction:column;justify-content:flex-end}
+.reel-bg{position:absolute;inset:0;background:linear-gradient(180deg,#1C3654 0%,#0E1A2B 100%)}
+.reel-av{position:absolute;top:60px;left:50%;transform:translateX(-50%);width:170px;height:170px}
+.reel-bubble{position:absolute;top:240px;left:14px;right:54px;background:var(--card);color:var(--navy);border-radius:16px;padding:10px 12px;font-size:12.5px;display:flex;gap:8px;align-items:center;box-shadow:0 10px 24px rgba(0,0,0,.3)}
+.reel-cap{position:relative;padding:16px;color:#fff;font-size:13px;background:linear-gradient(transparent,rgba(0,0,0,.7))}
+.reel-cap b{display:block;font-size:15px;margin-bottom:4px}
+.reel-side{position:absolute;right:10px;bottom:110px;display:flex;flex-direction:column;gap:16px;align-items:center;color:#fff;font-size:11px}
+.giftbox{position:relative;z-index:1;width:300px;background:linear-gradient(160deg,#FFB86B,#FF8A5B);border-radius:28px;padding:28px;color:var(--navy);box-shadow:0 30px 60px rgba(0,0,0,.4);text-align:center}
+.giftbox .bow{font-family:var(--fh);font-weight:700;font-size:13px;letter-spacing:.2em}
+.giftbox h4{font-size:34px;margin:12px 0 6px}
+.giftbox .gift-ic{width:120px;height:120px;margin:14px auto;background:var(--navy);border-radius:22px;display:grid;place-items:center;position:relative}
+.giftbox .gift-ic::before{content:'';position:absolute;inset:0 calc(50% - 8px);background:var(--amber)}
+.giftbox .gift-ic::after{content:'';position:absolute;inset:calc(50% - 8px) 0;background:var(--amber)}
+.poster{position:relative;z-index:1;width:290px;background:var(--card);border-radius:22px;padding:24px;box-shadow:0 30px 60px rgba(0,0,0,.4);color:var(--navy)}
+.poster .top{display:flex;justify-content:space-between;align-items:center}
+.poster h4{font-size:30px;margin:16px 0 8px}
+.poster .qr{width:84px;height:84px;background:repeating-conic-gradient(var(--navy) 0 25%,#fff 0 50%) 0 0/14px 14px;border-radius:8px;border:6px solid #fff;outline:2px solid var(--navy)}
+.leaflet{position:relative;z-index:1;width:300px;background:#fff;border-radius:20px;padding:22px;box-shadow:0 30px 60px rgba(0,0,0,.4);color:var(--navy);border-top:10px solid var(--blue)}
+.leaflet .rx{font-family:var(--fh);font-size:40px;font-weight:700;color:var(--blue);line-height:1}
+.listing{position:relative;z-index:1;width:320px;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.4);color:var(--navy)}
+.listing .img{height:170px;background:#EAF0E8;display:grid;place-items:center}
+.listing .body{padding:18px;display:flex;flex-direction:column;gap:8px}
+.kiosk{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+.kiosk .screen-k{width:300px;background:var(--card);border-radius:20px 20px 6px 6px;padding:20px;color:var(--navy);text-align:center;box-shadow:0 30px 60px rgba(0,0,0,.4)}
+.kiosk .stand{width:28px;height:70px;background:#3A506A}
+.kiosk .base{width:140px;height:14px;border-radius:8px;background:#3A506A}
+
+/* unit econ */
+.ue-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;align-items:start}
+.stackbar{display:flex;height:64px;border-radius:18px;overflow:hidden;margin:18px 0 14px}
+.stackbar div{display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:var(--navy);transition:flex-grow .5s cubic-bezier(.2,.8,.2,1);min-width:0;white-space:nowrap;overflow:hidden}
+.legend2{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.legend2 span{display:flex;align-items:center;gap:8px}
+.legend2 i{width:14px;height:14px;border-radius:4px;display:block}
+.streams{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:24px}
+.stream{background:var(--card);border:1px solid var(--rule);border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.stream .bign{font-size:40px}
+.stream small{color:var(--muted)}
+.verdict{display:flex;gap:14px;align-items:center;padding:16px 18px;border-radius:18px;margin-top:18px;font-weight:600}
+.verdict.ok{background:#E3F6EC;color:#164A33}
+.verdict.warn{background:#FCEAE3;color:#7A2E1A}
+.navy .verdict.ok{background:rgba(61,220,151,.14);color:var(--mint)}
+.navy .verdict.warn{background:rgba(255,138,91,.14);color:var(--coral)}
+
+/* growth */
+.gr-grid{display:grid;grid-template-columns:360px 1fr;gap:24px;align-items:start}
+.presets{display:flex;gap:8px;flex-wrap:wrap}
+.presets button{border:1.5px solid var(--line);background:var(--navy2);color:var(--soft);border-radius:999px;padding:9px 14px;font-weight:700;font-size:14px}
+.presets button.on{background:var(--mint);color:var(--navy);border-color:var(--mint)}
+.chart-box{position:relative}
+.chart-box svg{width:100%;height:auto;display:block}
+.yrs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.yr{background:var(--light);border:1px solid var(--rule);border-radius:20px;padding:18px}
+.yr h4{font-size:16px;color:var(--muted);font-family:var(--fb);font-weight:700;letter-spacing:.04em}
+.yr .row{display:flex;justify-content:space-between;margin-top:8px;font-size:15px}
+.yr .row b{font-family:var(--fh)}
+.be{display:flex;align-items:center;gap:16px;background:var(--navy);color:var(--white);border-radius:22px;padding:20px 24px;margin-top:18px}
+.be .bign{font-size:40px;color:var(--mint)}
+
+/* deal */
+.deal-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.offers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+.offer{border:1.5px solid var(--line);background:var(--navy2);color:var(--white);border-radius:22px;padding:18px;text-align:left;transition:.2s;display:flex;flex-direction:column;gap:6px}
+.offer:hover{border-color:var(--mint);transform:translateY(-3px)}
+.offer.on{border-color:var(--mint);background:rgba(61,220,151,.1)}
+.offer .who{display:flex;align-items:center;gap:10px;font-weight:700}
+.offer .face{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-family:var(--fh);font-weight:700;color:var(--navy)}
+.offer b.bign{font-size:24px}
+.offer small{color:var(--soft);font-size:13px}
+.own{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.own svg{width:220px;height:220px;flex-shrink:0}
+.own-leg{display:flex;flex-direction:column;gap:10px;flex:1;min-width:180px}
+.own-leg div{display:flex;align-items:center;gap:10px;font-size:15px}
+.own-leg i{width:14px;height:14px;border-radius:4px;display:block;flex-shrink:0}
+.own-leg span{flex:1}
+.own-leg b{font-family:var(--fh)}
+.dealbar{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:200}
+.deal-done{position:fixed;inset:0;z-index:150;background:rgba(14,26,43,.75);backdrop-filter:blur(6px);display:none;place-items:center;padding:20px}
+.deal-done.show{display:grid;animation:pagein .3s both}
+.deal-card{background:var(--card);border-radius:32px;padding:40px;max-width:520px;text-align:center;box-shadow:0 40px 90px rgba(0,0,0,.4)}
+.deal-card h3{font-size:44px;margin:14px 0}
+.deal-card p{color:var(--muted);font-size:17px}
+.handshake{width:96px;height:96px;border-radius:50%;background:var(--mint);display:grid;place-items:center;margin:0 auto}
+
+/* dashboard */
+.kpi6{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-bottom:22px}
+.kpi6 .kpi b{font-size:30px}
+.kpi6 .kpi em{font-style:normal;font-size:13px;font-weight:700;color:var(--mint-d);display:block;margin-top:4px}
+.dash2{display:grid;grid-template-columns:1.4fr 1fr;gap:22px}
+.dash3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-top:22px}
+.hbar{display:flex;flex-direction:column;gap:12px}
+.hbar .r{display:grid;grid-template-columns:110px 1fr 54px;gap:12px;align-items:center;font-size:14px;font-weight:600}
+.hbar .t{height:12px;border-radius:12px;background:#E6EBE4;overflow:hidden}
+.hbar .t i{display:block;height:100%;border-radius:12px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.hbar .r b{text-align:right;font-family:var(--fh)}
+.ticker{display:flex;flex-direction:column;gap:10px;max-height:330px;overflow:hidden}
+.tick{display:flex;gap:12px;align-items:center;padding:12px;border:1px solid var(--rule);border-radius:16px;animation:slidein .5s both;background:var(--card)}
+.tick .ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;flex-shrink:0}
+.tick b{font-size:14px;display:block}
+.tick small{color:var(--muted);font-size:12.5px}
+.live{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--mint-d);background:#E3F6EC;padding:5px 12px;border-radius:999px}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--mint-d);animation:blink 1s infinite}
+.cities{display:flex;flex-direction:column;gap:10px}
+.cities div{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--rule);font-size:15px}
+.cities div:last-child{border:0}
+
+@media (max-width:1080px){
+  .gtm-grid,.chan-stage,.ue-grid,.gr-grid,.deal-grid,.dash2,.dash3{grid-template-columns:1fr}
+  .kpi6{grid-template-columns:repeat(3,1fr)}
+  .streams{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .chan-tabs,.offers,.rollstats,.yrs,.chan-kpis{grid-template-columns:1fr 1fr}
+  .kpi6{grid-template-columns:1fr 1fr}
+  .tabs a{padding:10px 12px;font-size:14px}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#gtm" aria-label="Dozo"><span class="logo-mark"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="8" width="20" height="8" rx="4" fill="none" stroke="#0E1A2B" stroke-width="2.2"/><rect x="2" y="8" width="10" height="8" rx="4" fill="#0E1A2B"/></svg></span>dozo<span style="font-family:var(--fb);font-size:14px;font-weight:600;color:var(--soft);margin-left:6px;letter-spacing:0">for investors</span></a>
+    <div class="nav-r"><a class="btn btn-ghost btn-sm" href="index.html#home">Product site</a><a class="btn btn-mint btn-sm" href="#deal">Deal room</a></div>
+  </div>
+</header>
+
+<section class="subhero">
+  <div class="wrap">
+    <span class="presenter"><span class="avatar" data-av="son"></span>Presented by Harrish · go-to-market, business model, financial plan</span>
+    <h1>How Dozo becomes a <span>business.</span></h1>
+    <p class="lead">Where we launch, how we make money, how fast we grow, and the deal on the table. Move the sliders. Every number updates live.</p>
+    <nav class="tabs" aria-label="Sections">
+      <a href="#gtm" data-v="gtm"><b>01</b>Go-to-market</a>
+      <a href="#model" data-v="model"><b>02</b>Business model</a>
+      <a href="#growth" data-v="growth"><b>03</b>Growth simulator</a>
+      <a href="#deal" data-v="deal"><b>04</b>Deal room</a>
+      <a href="#dashboard" data-v="dashboard"><b>05</b>Company dashboard</a>
+    </nav>
+  </div>
+</section>
+
+<main>
+<!-- ============ GTM ============ -->
+<section class="view" id="v-gtm">
+  <div class="dark vsec">
+    <div class="wrap">
+      <div class="vh"><div><p class="eyebrow">Go-to-market · rollout</p><h2>Start in Chennai, then scale</h2><p class="lead">We launch where we can visit every pilot home ourselves, then expand to cities with the same kind of families.</p></div>
+        <div class="phase-btns" id="phaseBtns">
+          <button data-ph="1" class="on"><small style="color:var(--soft)">Year 1</small><b>Chennai</b></button>
+          <button data-ph="2"><small style="color:var(--soft)">Year 2</small><b>South India</b></button>
+          <button data-ph="3"><small style="color:var(--soft)">Year 3</small><b>All of India</b></button>
+        </div>
+      </div>
+      <div class="gtm-grid">
+        <div class="mapwrap" id="map" aria-label="Map of Dozo launch cities"><svg class="grid" id="mapLines" viewBox="0 0 100 105" preserveAspectRatio="none" aria-hidden="true"></svg></div>
+        <div>
+          <div class="rollstats" style="margin-top:0">
+            <div><small>Cities</small><b id="rsCities">1</b></div>
+            <div><small>Homes (total)</small><b id="rsHomes">2,000</b></div>
+            <div><small>Pharmacy partners</small><b id="rsPharm">40</b></div>
+          </div>
+          <div class="card navy" style="margin-top:18px">
+            <h3 id="phTitle" style="font-size:26px"></h3>
+            <p id="phText" style="color:var(--soft);margin-top:10px;font-size:17px"></p>
+            <div class="example" style="margin-top:18px;background:rgba(61,220,151,.12);border-color:rgba(61,220,151,.3);color:var(--white)"><b style="color:var(--mint)">Example</b><span id="phEx"></span></div>
+          </div>
+          <p class="est">Rollout targets are planning estimates.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="vsec">
+    <div class="wrap">
+      <div class="vh"><div><p class="eyebrow">Go-to-market · channels</p><h2>Six ways we reach families</h2><p class="lead">The grandparent uses Dozo, but the son or daughter buys it. Every channel speaks to the people who worry.</p></div></div>
+      <div class="chan-tabs" id="chanTabs"></div>
+      <div class="chan-stage">
+        <div class="creative" id="creative"></div>
+        <div class="chan-info" id="chanInfo"></div>
+      </div>
+      <p class="est">Cost to win a customer and sales share per channel are planning estimates.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MODEL ============ -->
+<section class="view" id="v-model">
+  <div class="vsec">
+    <div class="wrap">
+      <div class="vh"><div><p class="eyebrow">Business model</p><h2>Three ways Dozo makes money</h2></div></div>
+      <div class="streams">
+        <div class="stream"><span class="chip g" style="align-self:flex-start">ONE-TIME</span><span class="bign">₹1,999</span><b>The Dozo box</b><small>About ₹5 a day in the first year. Less than a cup of tea, for peace of mind.</small></div>
+        <div class="stream"><span class="chip b" style="align-self:flex-start">MONTHLY</span><span class="bign">₹99</span><b>Family app premium</b><small>A daughter in Dubai and a son in Chennai both get alerts, dose history and refill warnings.</small></div>
+        <div class="stream"><span class="chip a" style="align-self:flex-start">B2B · MONTHLY</span><span class="bign">₹149</span><b>Per care-home resident</b><small>One dashboard for every resident. Try the calculator below.</small></div>
+      </div>
+      <div class="ue-grid">
+        <div class="card">
+          <div class="card-h"><h3>Unit economics calculator</h3><button class="btn btn-ghost dk btn-sm" id="ueReset">Reset to plan</button></div>
+          <div class="ctrls" id="ueCtrls"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:22px">
+          <div class="card navy">
+            <h3>What one box earns</h3>
+            <div class="stackbar" id="ueBar"></div>
+            <div class="legend2" style="color:var(--soft)"><span><i style="background:#FF8A5B"></i>Parts</span><span><i style="background:#FFB86B"></i>Assembly and shipping</span><span><i style="background:#5BC0FF"></i>Cost to win customer</span><span><i style="background:#3DDC97"></i>Profit after marketing</span></div>
+            <div class="mgrid" style="margin-top:20px">
+              <div class="mbox"><small>Gross profit per box</small><div class="bign" id="ueGP"></div></div>
+              <div class="mbox"><small>Gross margin</small><div class="bign" id="ueGM"></div></div>
+              <div class="mbox"><small>Pays back marketing</small><div class="bign" id="uePB"></div></div>
+              <div class="mbox"><small>Value per family, year 1</small><div class="bign" id="ueLTV"></div></div>
+            </div>
+            <div class="verdict" id="ueVerdict"></div>
+          </div>
+          <div class="card">
+            <div class="card-h"><h3>Care-home revenue calculator</h3><small>₹149 per resident a month</small></div>
+            <div class="ctrls" id="chCtrls"></div>
+            <div class="mgrid" style="margin-top:20px"><div class="mbox"><small>Per month</small><div class="bign good" id="chMonth"></div></div><div class="mbox"><small>Per year</small><div class="bign good" id="chYear"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="est">Part costs: Wi-Fi chip ₹300, battery ₹150, speaker ₹100, sensors ₹60, lights ₹50, body ₹200, packaging ₹40. All figures are planning estimates.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GROWTH ============ -->
+<section class="view" id="v-growth">
+  <div class="dark vsec">
+    <div class="wrap">
+      <div class="vh"><div><p class="eyebrow">Financial plan · growth simulator</p><h2>“What if you sell only half?”</h2><p class="lead">Ask us anything. Move a slider and the 3-year plan recalculates.</p></div>
+        <div class="presets" id="presets"><button data-p="0.5">Conservative · half</button><button data-p="1" class="on">Our plan</button><button data-p="1.5">Bold · 1.5×</button></div>
+      </div>
+      <div class="gr-grid">
+        <div class="card navy" style="background:var(--navy2);border-color:var(--line)"><div class="ctrls" id="grCtrls"></div></div>
+        <div class="card">
+          <div class="card-h"><h3>Revenue and profit by year</h3><div class="legend2"><span><i style="background:#3DDC97"></i>Revenue</span><span><i style="background:#0E1A2B"></i>Profit</span></div></div>
+          <div class="chart-box" id="grChart"></div>
+          <div class="yrs" id="grYears"></div>
+          <div class="be"><div class="bign" id="beMonth"></div><div><b style="font-size:18px">First profitable month</b><p style="color:var(--soft);font-size:15px" id="beText"></p></div></div>
+        </div>
+      </div>
+      <p class="est">Model: revenue = boxes × price + families on premium × ₹99 × 12. Costs = parts and shipping ₹1,100 per box, marketing per customer, and team costs of ₹15L, ₹40L and ₹90L a year. Planning estimates.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEAL ============ -->
+<section class="view" id="v-deal">
+  <div class="dark vsec">
+    <div class="wrap">
+      <div class="vh"><div><p class="eyebrow">Deal room</p><h2>Sharks, make your offer</h2><p class="lead">Equity means ownership. Pick an amount and a share, and see what Dozo is worth and what your slice could become.</p></div></div>
+      <div class="deal-grid">
+        <div class="card navy" style="background:var(--navy2);border-color:var(--line)">
+          <div class="ctrls" id="dlCtrls"></div>
+          <div class="mgrid" style="margin-top:24px">
+            <div class="mbox" style="background:var(--navy)"><small>Company valuation (post-money)</small><div class="bign" id="dlVal" style="color:var(--mint)"></div></div>
+            <div class="mbox" style="background:var(--navy)"><small>Value before the investment</small><div class="bign" id="dlPre"></div></div>
+          </div>
+          <div class="verdict" id="dlVerdict"></div>
+        </div>
+        <div class="card navy" style="background:var(--navy2);border-color:var(--line)">
+          <h3>Who owns Dozo after the deal</h3>
+          <div class="own" style="margin-top:16px"><svg viewBox="0 0 220 220" id="dlPie" role="img" aria-label="Ownership after the deal"></svg><div class="own-leg" id="dlLeg"></div></div>
+          <div style="border-top:1px solid var(--line);margin-top:22px;padding-top:22px">
+            <div class="ctrls" id="dlFut"></div>
+            <div class="mgrid" style="margin-top:18px">
+              <div class="mbox" style="background:var(--navy)"><small>Shark’s stake in Year 3</small><div class="bign" id="dlStake" style="color:var(--mint)"></div></div>
+              <div class="mbox" style="background:var(--navy)"><small>Return on investment</small><div class="bign" id="dlRet"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h3 style="font-size:24px;margin-top:40px">Counter-offers sharks often make</h3>
+      <div class="offers" id="offers"></div>
+      <div class="dealbar"><button class="btn btn-mint" id="acceptBtn"><i data-i="handshake" data-c="#0E1A2B"></i>Accept this deal</button><button class="btn btn-ghost" id="dealReset">Back to our ask</button></div>
+      <p class="est">Year-3 stake value = equity × (Year-3 revenue × revenue multiple). It ignores future funding rounds that would dilute the stake. Illustration only, not financial advice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DASHBOARD ============ -->
+<section class="view" id="v-dashboard">
+  <div class="vsec">
+    <div class="wrap">
+      <div class="vh"><div><p class="eyebrow">Company dashboard · simulated</p><h2>Dozo in Year 2, month 6</h2><p class="lead">What running Dozo could look like, using our plan’s numbers.</p></div><span class="live"><i></i>Live simulation</span></div>
+      <div class="kpi6" id="kpi6"></div>
+      <div class="dash2">
+        <div class="card"><div class="card-h"><h3>Boxes sold per month</h3><small>Last 12 months</small></div><div id="dbChart"></div></div>
+        <div class="card"><div class="card-h"><h3>Latest orders</h3><span class="live"><i></i>Live</span></div><div class="ticker" id="ticker"></div></div>
+      </div>
+      <div class="dash3">
+        <div class="card"><div class="card-h"><h3>Sales by channel</h3></div><div class="hbar" id="dbChan"></div></div>
+        <div class="card"><div class="card-h"><h3>Top cities</h3><small>Active homes</small></div><div class="cities" id="dbCities"></div></div>
+        <div class="card navy"><div class="card-h"><h3>Health impact</h3></div>
+          <div class="big-ring"><svg width="110" height="110" viewBox="0 0 110 110" id="dbRing" aria-label="Average adherence 91 percent"></svg><div><b style="color:var(--white)">91%</b><small style="color:var(--soft)">of doses taken on time across all Dozo homes</small></div></div>
+          <p style="color:var(--soft);margin-top:18px">2,140 missed doses caught and taken late this month, after a family call.</p>
+        </div>
+      </div>
+      <p class="est">Simulated data based on the plan: about 12,000 homes by the end of Year 2.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><a class="logo" href="index.html#home"><span class="logo-mark"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="8" width="20" height="8" rx="4" fill="none" stroke="#0E1A2B" stroke-width="2.2"/><rect x="2" y="8" width="10" height="8" rx="4" fill="#0E1A2B"/></svg></span>dozo</a>
+      <p style="margin-top:12px">Dose done. Because care shouldn’t depend on memory.</p></div>
+    <p style="font-size:14px">Investor view · planning estimates and mock data · © 2026 Team Dozo</p>
+  </div>
+</footer>
+
+<div class="deal-done" id="dealDone" role="dialog" aria-modal="true" aria-labelledby="ddT"><div class="deal-card"><div class="handshake"><i data-i="handshake" data-c="#0E1A2B" data-s="48"></i></div><h3 id="ddT">Deal done!</h3><p id="ddText"></p><button class="btn btn-dark" style="margin-top:24px" id="ddClose">Dose done.</button></div></div>
+<canvas class="confetti" id="confetti"></canvas>
+<div class="toast" id="toast" role="status"><i data-i="check" data-c="#3DDC97" data-s="18"></i><span></span></div>
+
+<script>const AV={"grandpa": "<svg viewBox=\"0 0 200 200\" width=\"100%\" height=\"100%\" role=\"img\" aria-label=\"grandpa\"><defs><clipPath id=\"cCID\"><circle cx=\"100\" cy=\"100\" r=\"100\"/></clipPath></defs><g clip-path=\"url(#cCID)\"><path d=\"M24 210 C28 154 62 140 100 140 C138 140 172 154 176 210 Z\" fill=\"#2F6FA8\"/><rect x=\"88\" y=\"116\" width=\"24\" height=\"30\" fill=\"#B87A55\"/><path d=\"M82 141 L100 164 L118 141 Z\" fill=\"#F4F1EA\"/><ellipse cx=\"62\" cy=\"92\" rx=\"8\" ry=\"12\" fill=\"#C98B62\"/><ellipse cx=\"138\" cy=\"92\" rx=\"8\" ry=\"12\" fill=\"#C98B62\"/><ellipse cx=\"100\" cy=\"88\" rx=\"38\" ry=\"44\" fill=\"#C98B62\"/><path d=\"M62 84 C58 64 66 54 74 52 C69 66 69 78 71 94 Z\" fill=\"#ECEFF3\"/><path d=\"M138 84 C142 64 134 54 126 52 C131 66 131 78 129 94 Z\" fill=\"#ECEFF3\"/><path d=\"M77 72 q9 -6 18 0 M105 72 q9 -6 18 0\" fill=\"none\" stroke=\"#ECEFF3\" stroke-width=\"4\" stroke-linecap=\"round\"/><circle cx=\"86\" cy=\"86\" r=\"11\" fill=\"#FFFFFF\" fill-opacity=\"0.18\" stroke=\"#0E1A2B\" stroke-width=\"3\"/><circle cx=\"114\" cy=\"86\" r=\"11\" fill=\"#FFFFFF\" fill-opacity=\"0.18\" stroke=\"#0E1A2B\" stroke-width=\"3\"/><path d=\"M97 86 L103 86\" stroke=\"#0E1A2B\" stroke-width=\"3\"/><circle cx=\"86\" cy=\"87\" r=\"2.6\" fill=\"#0E1A2B\"/><circle cx=\"114\" cy=\"87\" r=\"2.6\" fill=\"#0E1A2B\"/><path d=\"M100 92 q-5 9 0 13\" fill=\"none\" stroke=\"#B87A55\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M80 111 C89 102 97 106 100 108 C103 106 111 102 120 111 C111 115 104 113 100 112 C96 113 89 115 80 111 Z\" fill=\"#ECEFF3\"/><path d=\"M89 118 q11 8 22 0\" fill=\"none\" stroke=\"#7A3E2A\" stroke-width=\"3\" stroke-linecap=\"round\"/></g></svg>", "grandma": "<svg viewBox=\"0 0 200 200\" width=\"100%\" height=\"100%\" role=\"img\" aria-label=\"grandma\"><defs><clipPath id=\"cCID\"><circle cx=\"100\" cy=\"100\" r=\"100\"/></clipPath></defs><g clip-path=\"url(#cCID)\"><circle cx=\"100\" cy=\"40\" r=\"20\" fill=\"#DADFE5\"/><path d=\"M24 210 C28 154 62 140 100 140 C138 140 172 154 176 210 Z\" fill=\"#B23A48\"/><rect x=\"88\" y=\"116\" width=\"24\" height=\"30\" fill=\"#A86C4B\"/><path d=\"M60 150 C90 170 130 190 150 210 L170 210 C150 180 110 160 76 146 Z\" fill=\"#FFB86B\"/><path d=\"M84 142 Q100 156 116 142\" fill=\"none\" stroke=\"#FFB86B\" stroke-width=\"5\"/><ellipse cx=\"62\" cy=\"92\" rx=\"8\" ry=\"12\" fill=\"#B97A56\"/><ellipse cx=\"138\" cy=\"92\" rx=\"8\" ry=\"12\" fill=\"#B97A56\"/><circle cx=\"62\" cy=\"106\" r=\"4\" fill=\"#FFB86B\"/><circle cx=\"138\" cy=\"106\" r=\"4\" fill=\"#FFB86B\"/><ellipse cx=\"100\" cy=\"88\" rx=\"38\" ry=\"44\" fill=\"#B97A56\"/><path d=\"M62 92 C58 56 80 42 100 42 C120 42 142 56 138 92 C134 72 122 58 100 58 C78 58 66 72 62 92 Z\" fill=\"#DADFE5\"/><path d=\"M100 44 L100 60\" stroke=\"#B9C0C9\" stroke-width=\"2\"/><path d=\"M77 72 q9 -6 18 0 M105 72 q9 -6 18 0\" fill=\"none\" stroke=\"#ECEFF3\" stroke-width=\"4\" stroke-linecap=\"round\"/><circle cx=\"86\" cy=\"86\" r=\"11\" fill=\"#FFFFFF\" fill-opacity=\"0.18\" stroke=\"#0E1A2B\" stroke-width=\"3\"/><circle cx=\"114\" cy=\"86\" r=\"11\" fill=\"#FFFFFF\" fill-opacity=\"0.18\" stroke=\"#0E1A2B\" stroke-width=\"3\"/><path d=\"M97 86 L103 86\" stroke=\"#0E1A2B\" stroke-width=\"3\"/><circle cx=\"86\" cy=\"87\" r=\"2.6\" fill=\"#0E1A2B\"/><circle cx=\"114\" cy=\"87\" r=\"2.6\" fill=\"#0E1A2B\"/><circle cx=\"100\" cy=\"68\" r=\"3\" fill=\"#D7263D\"/><path d=\"M100 92 q-5 9 0 13\" fill=\"none\" stroke=\"#A86C4B\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M89 118 q11 8 22 0\" fill=\"none\" stroke=\"#7A3E2A\" stroke-width=\"3\" stroke-linecap=\"round\"/><circle cx=\"76\" cy=\"104\" r=\"6\" fill=\"#E07A6A\" fill-opacity=\"0.35\"/><circle cx=\"124\" cy=\"104\" r=\"6\" fill=\"#E07A6A\" fill-opacity=\"0.35\"/></g></svg>", "son": "<svg viewBox=\"0 0 200 200\" width=\"100%\" height=\"100%\" role=\"img\" aria-label=\"son\"><defs><clipPath id=\"cCID\"><circle cx=\"100\" cy=\"100\" r=\"100\"/></clipPath></defs><g clip-path=\"url(#cCID)\"><path d=\"M24 210 C28 154 62 140 100 140 C138 140 172 154 176 210 Z\" fill=\"#3A7BD5\"/><rect x=\"88\" y=\"116\" width=\"24\" height=\"30\" fill=\"#A3684A\"/><path d=\"M84 140 L100 158 L116 140 L110 136 L100 148 L90 136 Z\" fill=\"#F4F6F8\"/><ellipse cx=\"62\" cy=\"92\" rx=\"8\" ry=\"12\" fill=\"#B57653\"/><ellipse cx=\"138\" cy=\"92\" rx=\"8\" ry=\"12\" fill=\"#B57653\"/><ellipse cx=\"100\" cy=\"88\" rx=\"38\" ry=\"44\" fill=\"#B57653\"/><path d=\"M62 86 C56 56 78 38 104 40 C128 42 144 58 138 86 C134 70 126 62 112 60 C96 66 78 64 66 70 Z\" fill=\"#1B1716\"/><path d=\"M77 72 q9 -6 18 0 M105 72 q9 -6 18 0\" fill=\"none\" stroke=\"#1B1716\" stroke-width=\"4\" stroke-linecap=\"round\"/><circle cx=\"86\" cy=\"87\" r=\"2.6\" fill=\"#0E1A2B\"/><circle cx=\"114\" cy=\"87\" r=\"2.6\" fill=\"#0E1A2B\"/><path d=\"M100 92 q-5 9 0 13\" fill=\"none\" stroke=\"#A3684A\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M89 118 q11 8 22 0\" fill=\"none\" stroke=\"#7A3E2A\" stroke-width=\"3\" stroke-linecap=\"round\"/></g></svg>", "daughter": "<svg viewBox=\"0 0 200 200\" width=\"100%\" height=\"100%\" role=\"img\" aria-label=\"daughter\"><defs><clipPath id=\"cCID\"><circle cx=\"100\" cy=\"100\" r=\"100\"/></clipPath></defs><g clip-path=\"url(#cCID)\"><path d=\"M54 90 C50 50 76 38 100 38 C124 38 150 50 146 90 L150 160 L50 160 Z\" fill=\"#1E1A1A\"/><path d=\"M24 210 C28 154 62 140 100 140 C138 140 172 154 176 210 Z\" fill=\"#8E6BD8\"/><rect x=\"88\" y=\"116\" width=\"24\" height=\"30\" fill=\"#9E6545\"/><ellipse cx=\"62\" cy=\"92\" rx=\"8\" ry=\"12\" fill=\"#B37452\"/><ellipse cx=\"138\" cy=\"92\" rx=\"8\" ry=\"12\" fill=\"#B37452\"/><ellipse cx=\"100\" cy=\"88\" rx=\"38\" ry=\"44\" fill=\"#B37452\"/><path d=\"M62 90 C60 60 80 46 100 46 C120 46 140 60 138 90 C130 70 118 62 100 62 C82 62 70 70 62 90 Z\" fill=\"#1E1A1A\"/><path d=\"M77 72 q9 -6 18 0 M105 72 q9 -6 18 0\" fill=\"none\" stroke=\"#1B1716\" stroke-width=\"4\" stroke-linecap=\"round\"/><circle cx=\"86\" cy=\"87\" r=\"2.6\" fill=\"#0E1A2B\"/><circle cx=\"114\" cy=\"87\" r=\"2.6\" fill=\"#0E1A2B\"/><path d=\"M100 92 q-5 9 0 13\" fill=\"none\" stroke=\"#9E6545\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M89 118 q11 8 22 0\" fill=\"none\" stroke=\"#7A3E2A\" stroke-width=\"3\" stroke-linecap=\"round\"/><circle cx=\"76\" cy=\"104\" r=\"6\" fill=\"#E07A6A\" fill-opacity=\"0.35\"/><circle cx=\"124\" cy=\"104\" r=\"6\" fill=\"#E07A6A\" fill-opacity=\"0.35\"/></g></svg>", "nurse": "<svg viewBox=\"0 0 200 200\" width=\"100%\" height=\"100%\" role=\"img\" aria-label=\"nurse\"><defs><clipPath id=\"cCID\"><circle cx=\"100\" cy=\"100\" r=\"100\"/></clipPath></defs><g clip-path=\"url(#cCID)\"><ellipse cx=\"100\" cy=\"86\" rx=\"46\" ry=\"50\" fill=\"#1E1A1A\"/><circle cx=\"100\" cy=\"40\" r=\"16\" fill=\"#1E1A1A\"/><path d=\"M24 210 C28 154 62 140 100 140 C138 140 172 154 176 210 Z\" fill=\"#2BB3A3\"/><rect x=\"88\" y=\"116\" width=\"24\" height=\"30\" fill=\"#975F40\"/><path d=\"M86 140 L100 160 L114 140\" fill=\"none\" stroke=\"#1E8C80\" stroke-width=\"5\"/><rect x=\"128\" y=\"168\" width=\"18\" height=\"6\" rx=\"2\" fill=\"#F4F6F8\"/><rect x=\"134\" y=\"162\" width=\"6\" height=\"18\" rx=\"2\" fill=\"#F4F6F8\"/><ellipse cx=\"62\" cy=\"92\" rx=\"8\" ry=\"12\" fill=\"#A86B4A\"/><ellipse cx=\"138\" cy=\"92\" rx=\"8\" ry=\"12\" fill=\"#A86B4A\"/><ellipse cx=\"100\" cy=\"88\" rx=\"38\" ry=\"44\" fill=\"#A86B4A\"/><path d=\"M62 90 C60 60 80 46 100 46 C120 46 140 60 138 90 C130 70 118 62 100 62 C82 62 70 70 62 90 Z\" fill=\"#1E1A1A\"/><path d=\"M68 52 L132 52 L126 34 L74 34 Z\" fill=\"#F4F6F8\"/><rect x=\"96\" y=\"38\" width=\"8\" height=\"10\" fill=\"#FF8A5B\"/><rect x=\"95\" y=\"39\" width=\"10\" height=\"8\" fill=\"none\"/><path d=\"M77 72 q9 -6 18 0 M105 72 q9 -6 18 0\" fill=\"none\" stroke=\"#1B1716\" stroke-width=\"4\" stroke-linecap=\"round\"/><circle cx=\"86\" cy=\"87\" r=\"2.6\" fill=\"#0E1A2B\"/><circle cx=\"114\" cy=\"87\" r=\"2.6\" fill=\"#0E1A2B\"/><path d=\"M100 92 q-5 9 0 13\" fill=\"none\" stroke=\"#975F40\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M89 118 q11 8 22 0\" fill=\"none\" stroke=\"#7A3E2A\" stroke-width=\"3\" stroke-linecap=\"round\"/><circle cx=\"76\" cy=\"104\" r=\"6\" fill=\"#E07A6A\" fill-opacity=\"0.35\"/><circle cx=\"124\" cy=\"104\" r=\"6\" fill=\"#E07A6A\" fill-opacity=\"0.35\"/></g></svg>"};window.MINI_BOX_SVG="<rect x=\"2\" y=\"2\" width=\"556\" height=\"436\" rx=\"40\" fill=\"#16263B\" stroke=\"#24384F\" stroke-width=\"2\"/><circle cx=\"62\" cy=\"62\" r=\"18\" fill=\"#3DDC97\" opacity=\"0.25\"/><circle cx=\"62\" cy=\"62\" r=\"9\" fill=\"#3DDC97\"/><circle cx=\"440\" cy=\"54\" r=\"3.5\" fill=\"#3A506A\"/><circle cx=\"440\" cy=\"68\" r=\"3.5\" fill=\"#3A506A\"/><circle cx=\"454\" cy=\"54\" r=\"3.5\" fill=\"#3A506A\"/><circle cx=\"454\" cy=\"68\" r=\"3.5\" fill=\"#3A506A\"/><circle cx=\"468\" cy=\"54\" r=\"3.5\" fill=\"#3A506A\"/><circle cx=\"468\" cy=\"68\" r=\"3.5\" fill=\"#3A506A\"/><circle cx=\"482\" cy=\"54\" r=\"3.5\" fill=\"#3A506A\"/><circle cx=\"482\" cy=\"68\" r=\"3.5\" fill=\"#3A506A\"/><circle cx=\"496\" cy=\"54\" r=\"3.5\" fill=\"#3A506A\"/><circle cx=\"496\" cy=\"68\" r=\"3.5\" fill=\"#3A506A\"/><circle cx=\"510\" cy=\"54\" r=\"3.5\" fill=\"#3A506A\"/><circle cx=\"510\" cy=\"68\" r=\"3.5\" fill=\"#3A506A\"/><rect x=\"53\" y=\"121\" width=\"54\" height=\"60\" rx=\"14\" fill=\"#122033\" stroke=\"#2A3F57\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/><rect x=\"119\" y=\"121\" width=\"54\" height=\"60\" rx=\"14\" fill=\"#122033\" stroke=\"#2A3F57\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/><rect x=\"185\" y=\"121\" width=\"54\" height=\"60\" rx=\"14\" fill=\"#122033\" stroke=\"#2A3F57\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/><rect x=\"251\" y=\"121\" width=\"54\" height=\"60\" rx=\"14\" fill=\"#122033\" stroke=\"#2A3F57\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/><rect x=\"316\" y=\"120\" width=\"56\" height=\"62\" rx=\"14\" fill=\"#1F3349\"/><rect x=\"329.0\" y=\"144.0\" width=\"30\" height=\"14\" rx=\"7\" fill=\"#F4F1EA\"/><path d=\"M336.0 144.0 h8 v14 h-8 a7 7 0 0 1 0 -14z\" fill=\"#FFB86B\"/><rect x=\"382\" y=\"120\" width=\"56\" height=\"62\" rx=\"14\" fill=\"#1F3349\"/><rect x=\"395.0\" y=\"144.0\" width=\"30\" height=\"14\" rx=\"7\" fill=\"#F4F1EA\"/><path d=\"M402.0 144.0 h8 v14 h-8 a7 7 0 0 1 0 -14z\" fill=\"#FFB86B\"/><rect x=\"448\" y=\"120\" width=\"56\" height=\"62\" rx=\"14\" fill=\"#1F3349\"/><rect x=\"461.0\" y=\"144.0\" width=\"30\" height=\"14\" rx=\"7\" fill=\"#F4F1EA\"/><path d=\"M468.0 144.0 h8 v14 h-8 a7 7 0 0 1 0 -14z\" fill=\"#FFB86B\"/><rect x=\"53\" y=\"193\" width=\"54\" height=\"60\" rx=\"14\" fill=\"#122033\" stroke=\"#2A3F57\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/><rect x=\"119\" y=\"193\" width=\"54\" height=\"60\" rx=\"14\" fill=\"#122033\" stroke=\"#2A3F57\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/><rect x=\"185\" y=\"193\" width=\"54\" height=\"60\" rx=\"14\" fill=\"#122033\" stroke=\"#2A3F57\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/><rect x=\"241\" y=\"183\" width=\"74\" height=\"80\" rx=\"22\" fill=\"#3DDC97\" opacity=\"0.3\"/><rect x=\"250\" y=\"192\" width=\"56\" height=\"62\" rx=\"14\" fill=\"#3DDC97\"/><rect x=\"263.0\" y=\"216.0\" width=\"30\" height=\"14\" rx=\"7\" fill=\"#FBFBF8\"/><path d=\"M270.0 216.0 h8 v14 h-8 a7 7 0 0 1 0 -14z\" fill=\"#0E1A2B\"/><rect x=\"316\" y=\"192\" width=\"56\" height=\"62\" rx=\"14\" fill=\"#1F3349\"/><rect x=\"329.0\" y=\"216.0\" width=\"30\" height=\"14\" rx=\"7\" fill=\"#F4F1EA\"/><path d=\"M336.0 216.0 h8 v14 h-8 a7 7 0 0 1 0 -14z\" fill=\"#FFB86B\"/><rect x=\"382\" y=\"192\" width=\"56\" height=\"62\" rx=\"14\" fill=\"#1F3349\"/><rect x=\"395.0\" y=\"216.0\" width=\"30\" height=\"14\" rx=\"7\" fill=\"#F4F1EA\"/><path d=\"M402.0 216.0 h8 v14 h-8 a7 7 0 0 1 0 -14z\" fill=\"#FFB86B\"/><rect x=\"448\" y=\"192\" width=\"56\" height=\"62\" rx=\"14\" fill=\"#1F3349\"/><rect x=\"461.0\" y=\"216.0\" width=\"30\" height=\"14\" rx=\"7\" fill=\"#F4F1EA\"/><path d=\"M468.0 216.0 h8 v14 h-8 a7 7 0 0 1 0 -14z\" fill=\"#FFB86B\"/><rect x=\"53\" y=\"265\" width=\"54\" height=\"60\" rx=\"14\" fill=\"#122033\" stroke=\"#2A3F57\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/><rect x=\"119\" y=\"265\" width=\"54\" height=\"60\" rx=\"14\" fill=\"#122033\" stroke=\"#2A3F57\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/><rect x=\"185\" y=\"265\" width=\"54\" height=\"60\" rx=\"14\" fill=\"#122033\" stroke=\"#2A3F57\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/><rect x=\"250\" y=\"264\" width=\"56\" height=\"62\" rx=\"14\" fill=\"#1F3349\"/><rect x=\"263.0\" y=\"288.0\" width=\"30\" height=\"14\" rx=\"7\" fill=\"#F4F1EA\"/><path d=\"M270.0 288.0 h8 v14 h-8 a7 7 0 0 1 0 -14z\" fill=\"#FFB86B\"/><rect x=\"316\" y=\"264\" width=\"56\" height=\"62\" rx=\"14\" fill=\"#1F3349\"/><rect x=\"329.0\" y=\"288.0\" width=\"30\" height=\"14\" rx=\"7\" fill=\"#F4F1EA\"/><path d=\"M336.0 288.0 h8 v14 h-8 a7 7 0 0 1 0 -14z\" fill=\"#FFB86B\"/><rect x=\"382\" y=\"264\" width=\"56\" height=\"62\" rx=\"14\" fill=\"#1F3349\"/><rect x=\"395.0\" y=\"288.0\" width=\"30\" height=\"14\" rx=\"7\" fill=\"#F4F1EA\"/><path d=\"M402.0 288.0 h8 v14 h-8 a7 7 0 0 1 0 -14z\" fill=\"#FFB86B\"/><rect x=\"448\" y=\"264\" width=\"56\" height=\"62\" rx=\"14\" fill=\"#1F3349\"/><rect x=\"461.0\" y=\"288.0\" width=\"30\" height=\"14\" rx=\"7\" fill=\"#F4F1EA\"/><path d=\"M468.0 288.0 h8 v14 h-8 a7 7 0 0 1 0 -14z\" fill=\"#FFB86B\"/><rect x=\"53\" y=\"337\" width=\"54\" height=\"60\" rx=\"14\" fill=\"#122033\" stroke=\"#2A3F57\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/><rect x=\"119\" y=\"337\" width=\"54\" height=\"60\" rx=\"14\" fill=\"#122033\" stroke=\"#2A3F57\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/><rect x=\"185\" y=\"337\" width=\"54\" height=\"60\" rx=\"14\" fill=\"#122033\" stroke=\"#2A3F57\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/><rect x=\"250\" y=\"336\" width=\"56\" height=\"62\" rx=\"14\" fill=\"#1F3349\"/><rect x=\"263.0\" y=\"360.0\" width=\"30\" height=\"14\" rx=\"7\" fill=\"#F4F1EA\"/><path d=\"M270.0 360.0 h8 v14 h-8 a7 7 0 0 1 0 -14z\" fill=\"#FFB86B\"/><rect x=\"316\" y=\"336\" width=\"56\" height=\"62\" rx=\"14\" fill=\"#1F3349\"/><rect x=\"329.0\" y=\"360.0\" width=\"30\" height=\"14\" rx=\"7\" fill=\"#F4F1EA\"/><path d=\"M336.0 360.0 h8 v14 h-8 a7 7 0 0 1 0 -14z\" fill=\"#FFB86B\"/><rect x=\"382\" y=\"336\" width=\"56\" height=\"62\" rx=\"14\" fill=\"#1F3349\"/><rect x=\"395.0\" y=\"360.0\" width=\"30\" height=\"14\" rx=\"7\" fill=\"#F4F1EA\"/><path d=\"M402.0 360.0 h8 v14 h-8 a7 7 0 0 1 0 -14z\" fill=\"#FFB86B\"/><rect x=\"448\" y=\"336\" width=\"56\" height=\"62\" rx=\"14\" fill=\"#1F3349\"/><rect x=\"461.0\" y=\"360.0\" width=\"30\" height=\"14\" rx=\"7\" fill=\"#F4F1EA\"/><path d=\"M468.0 360.0 h8 v14 h-8 a7 7 0 0 1 0 -14z\" fill=\"#FFB86B\"/>";</script>
+<script>(function(){
+'use strict';
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+
+/* ---------- icons & avatars ---------- */
+const P={
+  check:'<path d="M20 6 9 17l-5-5"/>',
+  alert:'<path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>',
+  play:'<path d="m6 3 14 9-14 9z"/>',
+  gift:'<rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18M12 8S10 3 7.5 3a2.5 2.5 0 0 0 0 5M12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/>',
+  store:'<path d="M3 9 5 3h14l2 6"/><path d="M3 9h18v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M5 13v8h14v-8"/>',
+  steth:'<path d="M5 3v6a5 5 0 0 0 10 0V3"/><path d="M10 14v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="12" r="2"/>',
+  cart:'<circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l3 12h11l2-8H6"/>',
+  users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',
+  heart:'<path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/>',
+  chat:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+  send:'<path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/>',
+  bell:'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>',
+  handshake:'<path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.9-3.9a2 2 0 0 0-2.8 0l-.9.9a2 2 0 0 1-2.8 0 1 1 0 0 1 0-1.4L12.6 6a2 2 0 0 1 2.8 0L21 11.6"/><path d="m21 3 1 11h-2M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3M3 4h8"/>',
+  home:'<path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>',
+  pill:'<path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7z"/><path d="m8.5 8.5 7 7"/>',
+  trend:'<path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/>'
+};
+function icon(n,c,s){return '<svg width="'+(s||22)+'" height="'+(s||22)+'" viewBox="0 0 24 24" fill="none" stroke="'+(c||'currentColor')+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(P[n]||'')+'</svg>';}
+let uid=0;
+const AVBG={grandpa:'#DFF5EA',grandma:'#FCE3D0',son:'#DCEBFA',daughter:'#EFE7FB',nurse:'#E6E0FA'};
+function avatar(k,bg){return '<span style="display:block;width:100%;height:100%;border-radius:50%;background:'+(bg||AVBG[k])+'">'+AV[k].replace(/CID/g,'b'+(++uid))+'</span>';}
+function paint(){$$('i[data-i]').forEach(e=>e.outerHTML=icon(e.dataset.i,e.dataset.c,e.dataset.s));$$('[data-av]').forEach(e=>{e.innerHTML=avatar(e.dataset.av);e.removeAttribute('data-av');});}
+let tt;function toast(m){const t=$('#toast');$('span',t).textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2800);}
+
+/* ---------- formatting ---------- */
+function inr(n,short){
+  const neg=n<0;n=Math.abs(n);let s;
+  if(n>=1e7)s='₹'+(n/1e7).toFixed(n>=1e8?1:2).replace(/\.?0+$/,'')+' Cr';
+  else if(n>=1e5)s='₹'+(n/1e5).toFixed(n>=1e6?1:2).replace(/\.?0+$/,'')+(short?'L':' lakh');
+  else s='₹'+Math.round(n).toLocaleString('en-IN');
+  return (neg?'−':'')+s;
+}
+const num=n=>Math.round(n).toLocaleString('en-IN');
+
+/* ---------- slider factory ---------- */
+function slider(host,c,on){
+  const w=document.createElement('div');w.className='ctrl';
+  const id='s_'+c.id;
+  w.innerHTML='<div class="top"><label for="'+id+'">'+c.label+'</label><output for="'+id+'"></output></div><input type="range" id="'+id+'" min="'+c.min+'" max="'+c.max+'" step="'+c.step+'" value="'+c.val+'">'+(c.note?'<small>'+c.note+'</small>':'');
+  host.appendChild(w);
+  const inp=$('input',w),out=$('output',w);
+  const upd=()=>{const v=+inp.value;out.textContent=c.fmt(v);inp.style.setProperty('--p',((v-c.min)/(c.max-c.min)*100)+'%');};
+  inp.addEventListener('input',()=>{upd();on&&on();});upd();
+  return {get v(){return +inp.value;},set(v){inp.value=v;upd();},el:inp};
+}
+
+/* ---------- router ---------- */
+const VIEWS=['gtm','model','growth','deal','dashboard'];
+function route(){
+  let v=(location.hash||'#gtm').slice(1);if(!VIEWS.includes(v))v='gtm';
+  $$('.view').forEach(x=>x.classList.toggle('on',x.id==='v-'+v));
+  $$('.tabs a').forEach(a=>a.classList.toggle('on',a.dataset.v===v));
+  $('#dealDone').classList.remove('show');
+  if(v==='dashboard')startTicker();else stopTicker();
+  if(v==='growth')drawGrowth();
+}
+window.addEventListener('hashchange',()=>{route();const t=$('.tabs');if(t&&window.scrollY>t.offsetTop)window.scrollTo({top:t.offsetTop-90,behavior:'smooth'});});
+
+/* ================= GTM: map ================= */
+const CITIES=[
+  ['Chennai',13.08,80.27,1,'r',1],['Bengaluru',12.97,77.59,2,'l'],['Hyderabad',17.38,78.49,2,'l'],['Kochi',9.93,76.26,2,'l'],['Madurai',9.93,78.12,2,'r'],['Coimbatore',11.02,76.96,2,'l'],['Visakhapatnam',17.69,83.22,2,'r'],
+  ['Mumbai',19.08,72.88,3,'l'],['Pune',18.52,73.86,3,'r'],['Ahmedabad',23.02,72.57,3,'l'],['Jaipur',26.91,75.79,3,'l'],['Delhi',28.61,77.21,3,'r'],['Chandigarh',30.73,76.78,3,'r'],['Lucknow',26.85,80.95,3,'r'],['Kolkata',22.57,88.36,3,'r'],['Bhubaneswar',20.30,85.82,3,'l'],['Guwahati',26.14,91.74,3,'l'],['Indore',22.72,75.86,3,'r']
+];
+const pos=(lat,lon)=>({x:6+(lon-68)/(97.5-68)*88,y:4+(37-lat)/(37-7.5)*96});
+const PH={
+  1:{c:1,h:2000,p:40,t:'Year 1 · Chennai first',x:'We know the city, we can visit every pilot home ourselves, and we can fix problems fast.',e:' If a grandmother in Anna Nagar says the voice is too soft, one of us is at her door the next day.'},
+  2:{c:7,h:12000,p:150,t:'Year 2 · South India',x:'Cities with the same kind of families: parents in hometowns, children working in tech hubs.',e:' A son in Bengaluru orders Dozo for his parents in Madurai. Both cities are already covered.'},
+  3:{c:CITIES.length,h:42000,p:500,t:'Year 3 · All of India',x:'National reach through online stores, pharmacy chains and care-home partnerships.',e:' A daughter in Delhi sets up Dozo for her father in Lucknow, with Hindi voice reminders.'}
+};
+let phase=1;
+function buildMap(){
+  const m=$('#map');
+  CITIES.forEach((c,i)=>{const p=pos(c[1],c[2]);const d=document.createElement('div');d.className='city'+(c[5]?' hq':'');d.style.left=p.x+'%';d.style.top=(p.y/105*100)+'%';
+    d.innerHTML='<i></i><span>'+c[0]+'</span>';if(c[4]==='l')d.classList.add('l');d.dataset.ph=c[3];m.appendChild(d);});
+  let g='';for(let x=0;x<=100;x+=4)for(let y=0;y<=105;y+=4)g+='<circle cx="'+x+'" cy="'+y+'" r=".25" fill="#2A3F57"/>';
+  $('#mapLines').innerHTML='<g>'+g+'</g><g id="arcs"></g>';
+}
+function setPhase(n){
+  phase=n;$$('#phaseBtns button').forEach(b=>b.classList.toggle('on',+b.dataset.ph===n));
+  $$('#map .city').forEach(c=>c.classList.toggle('lit',+c.dataset.ph<=n));
+  const hq=pos(13.08,80.27);
+  $('#arcs').innerHTML=CITIES.filter(c=>c[3]<=n&&!c[5]).map((c,i)=>{const p=pos(c[1],c[2]);const mx=(hq.x+p.x)/2,my=(hq.y+p.y)/2-6;return '<path d="M'+hq.x+' '+hq.y+' Q'+mx+' '+my+' '+p.x+' '+p.y+'" fill="none" stroke="#3DDC97" stroke-width=".35" stroke-dasharray="1 1" opacity=".7"><animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/></path>';}).join('');
+  const d=PH[n];count($('#rsCities'),d.c);count($('#rsHomes'),d.h);count($('#rsPharm'),d.p);
+  $('#phTitle').textContent=d.t;$('#phText').textContent=d.x;$('#phEx').textContent=d.e;
+}
+function count(el,to){const from=+(el.dataset.v||0);el.dataset.v=to;const t0=performance.now();const f=t=>{const k=Math.min(1,(t-t0)/700);el.textContent=num(from+(to-from)*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f);};requestAnimationFrame(f);}
+$('#phaseBtns').addEventListener('click',e=>{const b=e.target.closest('[data-ph]');if(b)setPhase(+b.dataset.ph);});
+
+/* ================= GTM: channels ================= */
+const CH=[
+  {k:'reels',n:'Emotional reels',ic:'play',col:'#3DDC97',cac:450,share:24,reach:'25–45 year olds living away from home',
+   d:'Short, emotional videos on Instagram and YouTube, where our buyers spend hours every day.',
+   ex:'A son in a Bengaluru meeting gets a buzz: “Dose not taken. Call Thatha?” He calls, Thatha laughs and takes the tablet. Every child watching thinks: that’s my family.',
+   art:()=>'<div class="mini-phone"><div class="scr"><div class="reel-bg"></div><div class="reel-av">'+avatar('grandpa','#244A6E')+'</div><div class="reel-bubble">'+icon('bell','#B4442A',18)+'<span><b>Dose not taken.</b> Call Thatha?</span></div><div class="reel-side">'+icon('heart','#fff',24)+'<span>48K</span>'+icon('chat','#fff',24)+'<span>2.1K</span>'+icon('send','#fff',24)+'</div><div class="reel-cap"><b>@dozo.care</b>Because care shouldn’t depend on memory. #DoseDone</div></div></div>'},
+  {k:'gift',n:'“Gift care” campaigns',ic:'gift',col:'#FFB86B',cac:350,share:12,reach:'Festival and special-day gifting',
+   d:'Dozo becomes the gift that keeps working every day: Diwali, Pongal, Mother’s Day and Father’s Day.',
+   ex:'This Diwali, instead of a box of sweets, gift your parents a Dozo in a festive gift box. Buy one for your in-laws at a discount.',
+   art:()=>'<div class="giftbox"><div class="bow">DIWALI SPECIAL</div><h4>Gift care to Amma &amp; Appa</h4><div class="gift-ic"></div><p style="font-weight:600">Dozo festive box · ₹1,999</p><p style="font-size:13px;margin-top:6px">Second box for in-laws: 10% off</p></div>'},
+  {k:'pharm',n:'Pharmacy tie-ups',ic:'store',col:'#5BC0FF',cac:300,share:27,reach:'Where medicines are bought every month',
+   d:'A Dozo display at the billing counter. Pharmacists earn a commission on every box, so they recommend it.',
+   ex:'A daughter buying her father’s BP tablets sees Dozo at the counter. The pharmacist says: “He takes four tablets a day. This will remind him.”',
+   art:()=>'<div class="poster"><div class="top"><b style="font-family:var(--fh);font-size:22px">dozo</b><span class="chip g">At this pharmacy</span></div><h4>Never miss a dose.</h4><p style="color:var(--muted)">The smart pillbox that reminds Grandpa and alerts you.</p><div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:18px"><div><b style="font-family:var(--fh);font-size:34px">₹1,999</b><p style="font-size:13px;color:var(--muted)">Ask the pharmacist for a demo</p></div><div class="qr" aria-label="QR code"></div></div></div>'},
+  {k:'doc',n:'Doctor referrals',ic:'steth',col:'#C9A7FF',cac:250,share:14,reach:'Patients on long-term medicines',
+   d:'When a doctor recommends something, families listen. Doctors also get a monthly dose report.',
+   ex:'A cardiologist sees a patient whose BP isn’t under control. “Are you taking your tablets on time?” The family leaves with a Dozo leaflet and a clinic discount code.',
+   art:()=>'<div class="leaflet"><div class="rx">Rx</div><h4 style="font-size:24px;margin:10px 0 6px">Recommended by your doctor</h4><p style="color:var(--muted);font-size:14px">Missed doses can stop your medicine from working. Dozo reminds, and tells your family.</p><div style="background:#E4F3FD;border-radius:12px;padding:12px;margin-top:14px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:600">Clinic code</span><b style="font-family:var(--fh);font-size:20px;letter-spacing:.1em">HEART10</b></div></div>'},
+  {k:'online',n:'Online stores',ic:'cart',col:'#FF8A5B',cac:500,share:17,reach:'Anyone in India, two clicks away',
+   d:'Listed on major online marketplaces with delivery anywhere in India.',
+   ex:'A software engineer in Pune orders Dozo from her desk. It arrives at her parents’ home in Madurai in a few days. She sets up the app; they just open the box.',
+   art:()=>'<div class="listing"><div class="img"><svg width="190" height="150" viewBox="0 0 560 440" aria-hidden="true">'+MINI_BOX+'</svg></div><div class="body"><span class="chip g" style="align-self:flex-start">Free delivery</span><b style="font-size:17px">Dozo Smart Pillbox · 28 slots · Voice in Tamil, Hindi, English</b><div style="display:flex;justify-content:space-between;align-items:center"><b style="font-family:var(--fh);font-size:28px">₹1,999</b><span class="btn btn-mint btn-sm">'+icon('cart','#0E1A2B',16)+'Add to cart</span></div></div></div>'},
+  {k:'demo',n:'Live demo kiosks',ic:'users',col:'#3DDC97',cac:400,share:6,reach:'Hospitals and senior-citizen clubs',
+   d:'Elderly people trust what they can touch. A small stall lets them hear Dozo speak.',
+   ex:'At a senior-citizen club, a grandfather hears Dozo say “Time for your tablet” in Tamil and smiles. That evening he tells his son: “I want this.”',
+   art:()=>'<div class="kiosk"><div class="screen-k"><span class="chip g">Try it yourself</span><h4 style="font-size:26px;margin:12px 0">Hear Dozo speak</h4><div style="display:flex;gap:8px;justify-content:center"><span class="btn btn-dark btn-sm">தமிழ்</span><span class="btn btn-dark btn-sm">हिंदी</span><span class="btn btn-dark btn-sm">English</span></div><p style="color:var(--muted);font-size:13px;margin-top:12px">Sunday 10 AM · Anna Nagar Senior Citizens’ Club</p></div><div class="stand"></div><div class="base"></div></div>'}
+];
+let MINI_BOX='';
+let chan=0;
+function drawChannels(){
+  $('#chanTabs').innerHTML=CH.map((c,i)=>'<button data-c="'+i+'" class="'+(i===chan?'on':'')+'"><span class="k" style="background:'+c.col+'33">'+icon(c.ic,'#0E1A2B',20)+'</span>'+c.n+'</button>').join('');
+  const c=CH[chan];
+  $('#creative').innerHTML=c.art();
+  $('#chanInfo').innerHTML='<p class="eyebrow">Channel '+(chan+1)+' of 6</p><h3>'+c.n+'</h3><p class="lead">'+c.d+'</p><div class="chan-kpis"><div><small>Cost to win a customer</small><b>₹'+c.cac+'</b></div><div><small>Share of sales</small><b>'+c.share+'%</b></div><div><small>Reaches</small><b style="font-size:15px;line-height:1.3">'+c.reach+'</b></div></div><div class="example"><b>Example</b>'+c.ex+'</div>';
+}
+$('#chanTabs').addEventListener('click',e=>{const b=e.target.closest('[data-c]');if(b){chan=+b.dataset.c;drawChannels();}});
+
+/* ================= MODEL ================= */
+const UE0={price:1999,parts:900,ship:200,cac:400,attach:20};
+const ue={};
+function buildUE(){
+  const h=$('#ueCtrls');const on=drawUE;
+  ue.price=slider(h,{id:'price',label:'Box price',min:999,max:2999,step:50,val:UE0.price,fmt:v=>inr(v)},on);
+  ue.parts=slider(h,{id:'parts',label:'Parts cost',min:500,max:1400,step:25,val:UE0.parts,fmt:v=>inr(v)},on);
+  ue.ship=slider(h,{id:'ship',label:'Assembly and shipping',min:100,max:400,step:10,val:UE0.ship,fmt:v=>inr(v)},on);
+  ue.cac=slider(h,{id:'cac',label:'Cost to win one customer',min:100,max:1000,step:25,val:UE0.cac,fmt:v=>inr(v),note:'Ads, pharmacy commission, demo stalls'},on);
+  ue.attach=slider(h,{id:'attach',label:'Families who take premium (₹99/month)',min:0,max:60,step:5,val:UE0.attach,fmt:v=>v+'%'},on);
+  const c=$('#chCtrls');
+  ue.res=slider(c,{id:'res',label:'Residents in the care home',min:10,max:200,step:5,val:40,fmt:v=>v},drawCH);
+  ue.homes=slider(c,{id:'homes',label:'Care homes signed up',min:1,max:100,step:1,val:10,fmt:v=>v},drawCH);
+}
+function drawUE(){
+  const p=ue.price.v,pa=ue.parts.v,sh=ue.ship.v,ca=ue.cac.v,at=ue.attach.v/100;
+  const gp=p-pa-sh,net=gp-ca,gm=gp/p*100,pb=gp/ca,ltv=gp+at*99*12*.9;
+  const seg=[[pa,'#FF8A5B','Parts'],[sh,'#FFB86B','Ship'],[Math.min(ca,Math.max(gp,0)),'#5BC0FF','Marketing'],[Math.max(net,0),'#3DDC97','Profit']];
+  $('#ueBar').innerHTML=seg.map(s=>'<div style="flex-grow:'+Math.max(s[0],0.0001)+';background:'+s[1]+'" title="'+s[2]+'">'+(s[0]/p>.12?inr(s[0]):'')+'</div>').join('');
+  $('#ueGP').textContent=inr(gp);$('#ueGP').className='bign '+(gp>0?'good':'bad');
+  $('#ueGM').textContent=Math.round(gm)+'%';
+  $('#uePB').textContent=(pb>0?pb.toFixed(1):'0')+'×';$('#uePB').className='bign '+(pb>=1.5?'good':'bad');
+  $('#ueLTV').textContent=inr(ltv);
+  const v=$('#ueVerdict');
+  if(net>0&&gm>=35){v.className='verdict ok';v.innerHTML=icon('check','currentColor',22)+'<span>Healthy: every box keeps '+inr(net)+' after paying for its own marketing.</span>';}
+  else if(gp>0){v.className='verdict warn';v.innerHTML=icon('alert','currentColor',22)+'<span>Thin: '+(net<=0?'marketing costs more than the box earns.':'margin is below 35%.')+' Raise the price or cut costs.</span>';}
+  else{v.className='verdict warn';v.innerHTML=icon('alert','currentColor',22)+'<span>Loss on every box. This price doesn’t work.</span>';}
+}
+function drawCH(){const m=ue.res.v*ue.homes.v*149;$('#chMonth').textContent=inr(m);$('#chYear').textContent=inr(m*12);}
+$('#ueReset').addEventListener('click',()=>{Object.keys(UE0).forEach(k=>ue[k].set(UE0[k]));drawUE();toast('Back to our plan: ₹899 profit per box');});
+
+/* ================= GROWTH ================= */
+const GR0={y1:2000,y2:10000,y3:30000,price:1999,attach:20,cac:400};
+const gr={};const FIXED=[1500000,4000000,9000000],COGS=1100;
+function buildGR(){
+  const h=$('#grCtrls');const on=()=>{$$('#presets button').forEach(b=>b.classList.remove('on'));drawGrowth();};
+  gr.y1=slider(h,{id:'y1',label:'Homes in Year 1',min:500,max:6000,step:100,val:GR0.y1,fmt:num},on);
+  gr.y2=slider(h,{id:'y2',label:'Homes in Year 2',min:1000,max:30000,step:500,val:GR0.y2,fmt:num},on);
+  gr.y3=slider(h,{id:'y3',label:'Homes in Year 3',min:2000,max:90000,step:1000,val:GR0.y3,fmt:num},on);
+  gr.price=slider(h,{id:'gprice',label:'Box price',min:999,max:2999,step:50,val:GR0.price,fmt:v=>inr(v)},on);
+  gr.attach=slider(h,{id:'gattach',label:'Families on premium',min:0,max:60,step:5,val:GR0.attach,fmt:v=>v+'%'},on);
+  gr.cac=slider(h,{id:'gcac',label:'Cost to win one customer',min:100,max:1000,step:25,val:GR0.cac,fmt:v=>inr(v)},on);
+}
+function model(){
+  const H=[gr.y1.v,gr.y2.v,gr.y3.v],pr=gr.price.v,at=gr.attach.v/100,cac=gr.cac.v;
+  let cum=0;const yrs=H.map((h,i)=>{cum+=h;const subs=cum*at*99*12;const rev=h*pr+subs;const gp=h*(pr-COGS)+subs*.9;const profit=gp-h*cac-FIXED[i];return {h,cum,rev,profit};});
+  let be=null,c2=0;for(let m=1;m<=36;m++){const y=Math.ceil(m/12)-1;const b=H[y]/12;c2+=b;const subsM=c2*at*99;const p=b*(pr-COGS)+subsM*.9-b*cac-FIXED[y]/12;if(p>0&&be===null)be=m;}
+  return {yrs,be};
+}
+function drawGrowth(){
+  if(!gr.y1)return;
+  const {yrs,be}=model();
+  const W=640,Hh=300,pad=70,base=230,max=Math.max(...yrs.map(y=>y.rev),1);
+  const minP=Math.min(0,...yrs.map(y=>y.profit));const scale=(base-30)/max;const negRoom=Math.min(50,-minP*scale);
+  let s='<svg viewBox="0 0 '+W+' '+(Hh+negRoom)+'" role="img" aria-label="Revenue and profit for three years">';
+  for(let i=0;i<=4;i++){const y=base-(base-30)*i/4;s+='<line x1="'+pad+'" x2="'+(W-10)+'" y1="'+y+'" y2="'+y+'" stroke="#E6EBE4"/><text x="'+(pad-6)+'" y="'+(y+4)+'" text-anchor="end" font-size="11" fill="#4A5868" font-family="Inter,sans-serif">'+inr(max*i/4,1).replace(' lakh','L')+'</text>';}
+  yrs.forEach((y,i)=>{const cx=pad+40+i*((W-pad-60)/3);const bw=62;const rh=y.rev*scale;const ph=Math.abs(y.profit)*scale;const neg=y.profit<0;
+    s+='<rect x="'+cx+'" y="'+(base-rh)+'" width="'+bw+'" height="'+rh+'" rx="10" fill="#3DDC97"><animate attributeName="height" from="0" to="'+rh+'" dur=".7s" fill="freeze"/><animate attributeName="y" from="'+base+'" to="'+(base-rh)+'" dur=".7s" fill="freeze"/></rect>';
+    s+='<rect x="'+(cx+bw+8)+'" y="'+(neg?base:base-ph)+'" width="'+bw+'" height="'+Math.max(ph,2)+'" rx="10" fill="'+(neg?'#FF8A5B':'#0E1A2B')+'"/>';
+    s+='<text x="'+(cx+bw/2)+'" y="'+(base-rh-8)+'" text-anchor="middle" font-size="14" font-weight="700" fill="#0E1A2B" font-family="Space Grotesk,sans-serif">'+inr(y.rev,1).replace(' lakh','L')+'</text>';
+    s+='<text x="'+(cx+bw*1.5+8)+'" y="'+(neg?base+ph+16:base-ph-8)+'" text-anchor="middle" font-size="13" font-weight="700" fill="'+(neg?'#B4442A':'#0E1A2B')+'" font-family="Space Grotesk,sans-serif">'+inr(y.profit,1).replace(' lakh','L')+'</text>';
+    s+='<text x="'+(cx+bw+4)+'" y="'+(Hh+negRoom-14)+'" text-anchor="middle" font-size="13" font-weight="700" fill="#4A5868" font-family="Inter,sans-serif">Year '+(i+1)+'</text>';});
+  s+='<line x1="'+pad+'" x2="'+(W-10)+'" y1="'+base+'" y2="'+base+'" stroke="#0E1A2B" stroke-width="1.5"/></svg>';
+  $('#grChart').innerHTML=s;
+  $('#grYears').innerHTML=yrs.map((y,i)=>'<div class="yr"><h4>YEAR '+(i+1)+'</h4><div class="row"><span>New homes</span><b>'+num(y.h)+'</b></div><div class="row"><span>Revenue</span><b>'+inr(y.rev,1)+'</b></div><div class="row"><span>Profit</span><b class="'+(y.profit>=0?'good':'bad')+'">'+inr(y.profit,1)+'</b></div></div>').join('');
+  if(be){const y=Math.ceil(be/12),m=be-(y-1)*12;$('#beMonth').textContent='Month '+be;$('#beText').textContent='Year '+y+', month '+m+'. From here, each month earns more than it costs.';}
+  else{$('#beMonth').textContent='Not yet';$('#beText').textContent='At these numbers Dozo doesn’t turn a monthly profit within 3 years. Sell more homes or lower the cost to win customers.';}
+}
+$('#presets').addEventListener('click',e=>{const b=e.target.closest('[data-p]');if(!b)return;const f=+b.dataset.p;gr.y1.set(Math.round(GR0.y1*f/100)*100);gr.y2.set(Math.round(GR0.y2*f/500)*500);gr.y3.set(Math.round(GR0.y3*f/1000)*1000);gr.price.set(GR0.price);gr.attach.set(GR0.attach);gr.cac.set(GR0.cac);$$('#presets button').forEach(x=>x.classList.toggle('on',x===b));drawGrowth();});
+
+/* ================= DEAL ================= */
+const dl={};
+const FOUND=[['Mahhie','#5BC0FF'],['Chetan','#FFB86B'],['Kishore','#C9A7FF'],['Harrish','#FF8A5B'],['Yash','#8FE3BC']];
+const OFFERS=[
+  {n:'Shark A',r:'Pharmacy chain owner',c:'#5BC0FF',inv:5000000,eq:20,extra:'+ shelf space in 300 pharmacies'},
+  {n:'Shark B',r:'Health-tech investor',c:'#C9A7FF',inv:7500000,eq:15,extra:'+ help with the app and hiring'},
+  {n:'Shark C',r:'Electronics manufacturer',c:'#FFB86B',inv:4000000,eq:10,extra:'+ manufacturing at lower cost'}
+];
+let offerSel=-1;
+function buildDeal(){
+  const h=$('#dlCtrls');const on=()=>{offerSel=-1;drawOffers();drawDeal();};
+  dl.inv=slider(h,{id:'inv',label:'Shark invests',min:1000000,max:10000000,step:500000,val:5000000,fmt:v=>inr(v)},on);
+  dl.eq=slider(h,{id:'eq',label:'For this share of Dozo (equity)',min:1,max:40,step:1,val:10,fmt:v=>v+'%'},on);
+  const f=$('#dlFut');
+  dl.rev=slider(f,{id:'rev3',label:'Dozo’s Year-3 revenue',min:10000000,max:150000000,step:5000000,val:70000000,fmt:v=>inr(v)},drawDeal);
+  dl.mul=slider(f,{id:'mul',label:'Valuation multiple (× revenue)',min:1,max:8,step:.5,val:3,fmt:v=>v+'×',note:'Health-tech startups are often valued at a few times their yearly revenue.'},drawDeal);
+}
+function drawDeal(){
+  const inv=dl.inv.v,eq=dl.eq.v,post=inv/(eq/100),pre=post-inv;
+  $('#dlVal').textContent=inr(post);$('#dlPre').textContent=inr(pre);
+  const v=$('#dlVerdict');
+  if(post>=50000000){v.className='verdict ok';v.innerHTML=icon('check','currentColor',22)+'<span>At or above our ask of ₹5 crore. Great for the founders.</span>';}
+  else if(post>=35000000){v.className='verdict ok';v.innerHTML=icon('handshake','currentColor',22)+'<span>A fair counter-offer. Worth taking if the shark brings more than money.</span>';}
+  else{const fair=Math.ceil(inv/50000000*100);v.className='verdict warn';v.innerHTML=icon('alert','currentColor',22)+'<span>Too much equity for this amount. Counter with about '+fair+'% to keep the ₹5 crore valuation.</span>';}
+  const parts=[['Shark',eq,'#3DDC97']].concat(FOUND.map(f=>[f[0],(100-eq)/5,f[1]]));
+  let a=-Math.PI/2,s='';const R=100,r=58,cx=110,cy=110;
+  parts.forEach(p=>{const ang=p[1]/100*Math.PI*2;const a2=a+ang;const lg=ang>Math.PI?1:0;
+    const x1=cx+R*Math.cos(a),y1=cy+R*Math.sin(a),x2=cx+R*Math.cos(a2),y2=cy+R*Math.sin(a2),x3=cx+r*Math.cos(a2),y3=cy+r*Math.sin(a2),x4=cx+r*Math.cos(a),y4=cy+r*Math.sin(a);
+    s+='<path d="M'+x1+' '+y1+' A'+R+' '+R+' 0 '+lg+' 1 '+x2+' '+y2+' L'+x3+' '+y3+' A'+r+' '+r+' 0 '+lg+' 0 '+x4+' '+y4+'Z" fill="'+p[2]+'" stroke="#16263B" stroke-width="3"/>';a=a2;});
+  s+='<text x="110" y="106" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="30" fill="#FBFBF8">'+eq+'%</text><text x="110" y="128" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="#C9D6E3">to the shark</text>';
+  $('#dlPie').innerHTML=s;
+  $('#dlLeg').innerHTML=parts.map(p=>'<div><i style="background:'+p[2]+'"></i><span>'+p[0]+'</span><b>'+(+p[1].toFixed(1))+'%</b></div>').join('');
+  const stake=eq/100*dl.rev.v*dl.mul.v,ret=stake/inv;
+  $('#dlStake').textContent=inr(stake);$('#dlRet').textContent=ret.toFixed(1)+'×';$('#dlRet').className='bign '+(ret>=1?'good':'bad');
+}
+function drawOffers(){
+  $('#offers').innerHTML=OFFERS.map((o,i)=>{const post=o.inv/(o.eq/100);return '<button class="offer'+(i===offerSel?' on':'')+'" data-o="'+i+'"><span class="who"><span class="face" style="background:'+o.c+'">'+o.n.slice(-1)+'</span>'+o.n+' · '+o.r+'</span><b class="bign">'+inr(o.inv,1)+' for '+o.eq+'%</b><small>'+o.extra+'</small><small>Values Dozo at <b style="color:var(--white)">'+inr(post)+'</b></small></button>';}).join('');
+}
+$('#offers').addEventListener('click',e=>{const b=e.target.closest('[data-o]');if(!b)return;offerSel=+b.dataset.o;const o=OFFERS[offerSel];dl.inv.set(o.inv);dl.eq.set(o.eq);drawOffers();drawDeal();toast(o.n+' offers '+inr(o.inv,1)+' for '+o.eq+'%');});
+$('#dealReset').addEventListener('click',()=>{offerSel=-1;dl.inv.set(5000000);dl.eq.set(10);drawOffers();drawDeal();});
+$('#acceptBtn').addEventListener('click',()=>{
+  const inv=dl.inv.v,eq=dl.eq.v,who=offerSel>=0?OFFERS[offerSel].n:'The shark';
+  $('#ddText').textContent=who+' invests '+inr(inv)+' for '+eq+'% of Dozo, valuing the company at '+inr(inv/(eq/100))+'. The five founders keep '+(100-eq)+'%.';
+  $('#dealDone').classList.add('show');confetti();$('#ddClose').focus();
+});
+$('#ddClose').addEventListener('click',()=>$('#dealDone').classList.remove('show'));
+$('#dealDone').addEventListener('click',e=>{if(e.target.id==='dealDone')$('#dealDone').classList.remove('show');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$('#dealDone').classList.remove('show');});
+function confetti(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const c=$('#confetti'),x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
+  const cols=['#3DDC97','#FFB86B','#5BC0FF','#C9A7FF','#FF8A5B','#FBFBF8'];
+  const ps=Array.from({length:160},()=>({x:innerWidth/2,y:innerHeight/2,vx:(Math.random()-.5)*16,vy:Math.random()*-16-4,r:Math.random()*6+4,c:cols[Math.floor(Math.random()*6)],a:Math.random()*6}));
+  let f=0;(function tick(){x.clearRect(0,0,c.width,c.height);ps.forEach(p=>{p.vy+=.45;p.x+=p.vx;p.y+=p.vy;p.a+=.2;x.save();x.translate(p.x,p.y);x.rotate(p.a);x.fillStyle=p.c;x.fillRect(-p.r/2,-p.r/4,p.r,p.r/2);x.restore();});if(++f<150)requestAnimationFrame(tick);else x.clearRect(0,0,c.width,c.height);})();
+}
+
+/* ================= DASHBOARD ================= */
+const MONTHS=[120,150,175,200,230,265,620,700,780,850,920,990];
+const ML=['Y1·M7','M8','M9','M10','M11','M12','Y2·M1','M2','M3','M4','M5','M6'];
+function buildDash(){
+  const k=[['Active homes','6,180','+11% this month'],['Boxes sold this month','990','+8% vs last month'],['Revenue this month','₹21.6L','Box sales + premium'],['Premium families','1,236','20% of homes'],['Pharmacy partners','96','+9 this month'],['Doses on time','91%','Across all homes']];
+  $('#kpi6').innerHTML=k.map(x=>'<div class="kpi"><small>'+x[0]+'</small><b>'+x[1]+'</b><em>'+x[2]+'</em></div>').join('');
+  const W=640,H=260,max=1100,bw=34,gap=(W-60-bw*12)/11;
+  let s='<svg viewBox="0 0 '+W+' '+(H+30)+'" role="img" aria-label="Boxes sold per month, rising from 120 to 990">';
+  [0,250,500,750,1000].forEach(v=>{const y=H-v/max*(H-20);s+='<line x1="44" x2="'+W+'" y1="'+y+'" y2="'+y+'" stroke="#E6EBE4"/><text x="38" y="'+(y+4)+'" text-anchor="end" font-size="11" fill="#4A5868" font-family="Inter,sans-serif">'+v+'</text>';});
+  MONTHS.forEach((v,i)=>{const x=56+i*(bw+gap),h=v/max*(H-20);s+='<rect x="'+x+'" y="'+(H-h)+'" width="'+bw+'" height="'+h+'" rx="8" fill="'+(i>=6?'#3DDC97':'#8FE3BC')+'"/><text x="'+(x+bw/2)+'" y="'+(H+18)+'" text-anchor="middle" font-size="10.5" fill="#4A5868" font-family="Inter,sans-serif">'+ML[i]+'</text>';if(i===11)s+='<text x="'+(x+bw/2)+'" y="'+(H-h-8)+'" text-anchor="middle" font-size="13" font-weight="700" fill="#0E1A2B" font-family="Space Grotesk,sans-serif">'+v+'</text>';});
+  s+='<line x1="'+(56+6*(bw+gap)-gap/2)+'" x2="'+(56+6*(bw+gap)-gap/2)+'" y1="10" y2="'+H+'" stroke="#0E1A2B" stroke-dasharray="4 4"/><text x="'+(56+6*(bw+gap))+'" y="22" font-size="12" font-weight="700" fill="#0E1A2B" font-family="Inter,sans-serif">South India launch</text></svg>';
+  $('#dbChart').innerHTML=s;
+  const chans=[['Pharmacy',27,'#5BC0FF'],['Reels',24,'#3DDC97'],['Online',17,'#FF8A5B'],['Doctors',14,'#C9A7FF'],['Gifting',12,'#FFB86B'],['Demos',6,'#8FE3BC']];
+  $('#dbChan').innerHTML=chans.map(c=>'<div class="r"><span>'+c[0]+'</span><div class="t"><i style="width:'+(c[1]/27*100)+'%;background:'+c[2]+'"></i></div><b>'+c[1]+'%</b></div>').join('');
+  const cities=[['Chennai',4120],['Bengaluru',820],['Coimbatore',410],['Madurai',360],['Hyderabad',290],['Kochi',180]];
+  $('#dbCities').innerHTML=cities.map(c=>'<div><span>'+c[0]+'</span><b style="font-family:var(--fh)">'+num(c[1])+'</b></div>').join('');
+  const C=2*Math.PI*46;$('#dbRing').innerHTML='<circle cx="55" cy="55" r="46" fill="none" stroke="#24384F" stroke-width="12"/><circle cx="55" cy="55" r="46" fill="none" stroke="#3DDC97" stroke-width="12" stroke-linecap="round" stroke-dasharray="'+(C*.91)+' '+C+'" transform="rotate(-90 55 55)"/>';
+}
+const TK={cities:['Chennai','Chennai','Chennai','Bengaluru','Coimbatore','Madurai','Hyderabad','Kochi','Trichy'],
+  kinds:[['New box order','store','#5BC0FF','via pharmacy'],['New box order','play','#3DDC97','via Instagram reel'],['New box order','cart','#FF8A5B','via online store'],['Premium upgrade','heart','#C9A7FF','₹99 a month'],['Doctor referral order','steth','#C9A7FF','clinic code HEART10'],['Care home signed','home','#FFB86B','+ residents on ₹149 plan']]};
+let tkTimer=null;
+function addTick(first){
+  const k=TK.kinds[Math.floor(Math.random()*TK.kinds.length)],c=TK.cities[Math.floor(Math.random()*TK.cities.length)];
+  const d=document.createElement('div');d.className='tick';
+  const sub=k[0]==='Care home signed'?(10+Math.floor(Math.random()*40))+' residents · '+c:c+' · '+k[3];
+  d.innerHTML='<span class="ic" style="background:'+k[2]+'33">'+icon(k[1],'#0E1A2B',18)+'</span><div style="flex:1"><b>'+k[0]+'</b><small>'+sub+'</small></div><small>'+(first?Math.floor(Math.random()*9+1)+' min ago':'just now')+'</small>';
+  const t=$('#ticker');t.prepend(d);while(t.children.length>6)t.lastChild.remove();
+}
+function startTicker(){if(tkTimer)return;if(!$('#ticker').children.length)for(let i=0;i<5;i++)addTick(true);tkTimer=setInterval(()=>addTick(false),3200);}
+function stopTicker(){clearInterval(tkTimer);tkTimer=null;}
+
+/* ---------- boot ---------- */
+MINI_BOX=window.MINI_BOX_SVG||'';
+paint();buildMap();setPhase(1);drawChannels();
+buildUE();drawUE();drawCH();
+buildGR();drawGrowth();
+buildDeal();drawOffers();drawDeal();
+buildDash();
+route();
+})();
+</script>
+</body>
+</html>
